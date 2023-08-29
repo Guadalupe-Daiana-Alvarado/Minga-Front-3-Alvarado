@@ -13,7 +13,7 @@ import Mangas from '../Pages/Mangas'
         element: <Layout/>,
         children: [
             {
-                path: '/Index',
+                path: '/',
                 element: <Index/>
             },
             {
