@@ -48,13 +48,14 @@ const Carrousel = () => {
         <img onClick={prev} className='cursor-pointer rotate-180 w-8 p-2 rounded-full bg-white' src={flecha1} alt="flecha1" />
       </div>
 
+      <div className='w-56 -mt-8'>
+        <img src={categories[counter]?.character_photo} alt="tarjeta2" />
+      </div>
+      
       <div className='w-48 -mt-8'>
         <img className='sm:pt-5 ' src={categories[counter]?.cover_photo}  alt="tarjeta1" />
       </div>
 
-      <div className='w-56 -mt-8'>
-        <img src={categories[counter]?.character_photo} alt="tarjeta2" />
-      </div>
 
       <div className='flex flex-col w-6/12 mt-20'>
         <h2 className='text-white text-3xl m-5'>{categories[counter]?.name} </h2>
