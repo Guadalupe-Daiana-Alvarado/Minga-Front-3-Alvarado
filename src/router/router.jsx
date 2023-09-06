@@ -1,37 +1,42 @@
 import React from 'react'
-import {createBrowserRouter} from 'react-router-dom'
+import { createBrowserRouter } from 'react-router-dom'
 import Index from '../Pages/Index'
 import Registre from '../Pages/Registre'
 import SignIn from '../Pages/SignIn'
 import Layout from '../Layouts/Layout'
 import Mangas from '../Pages/Mangas'
+import Page from '../Pages/Page'
 
-    const Router = createBrowserRouter([
-       
-       {
+const Router = createBrowserRouter([
+
+    {
         path: "/",
-        element: <Layout/>,
+        element: <Layout />,
         children: [
             {
                 path: '/',
-                element: <Index/>
+                element: <Index />
             },
             {
                 path: '/Registre',
-                element: <Registre/>
+                element: <Registre />
             },
             {
                 path: '/SignIn',
-                element: <SignIn/>
+                element: <SignIn />
             },
             {
                 path: '/Mangas',
-                element: <Mangas/>
+                element: <Mangas />
             },
+            {
+                path: '/chapter/:id/:page',
+                element: <Page />
+            }
         ]
-       }
-       
-    ])
+    }
 
-    export default Router
+])
+
+export default Router
 
