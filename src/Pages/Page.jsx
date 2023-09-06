@@ -1,42 +1,53 @@
-// aca vamos a renderizar las paginas de cada capitulo de chapter//
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
 const Page = () => {
-    let url = "http://localhost:8000/chapters/"
-    let { id, page } = useParams()
-    console.log(useParams())
-    let [counter, setCounter] = useState(0);
-    let [chapter, setChapter] = useState({})
-    let next = () => {
-        if (counter + 1 < chapter.length) { setCounter(counter + 1); }
-        else { setCounter(0); }
-    };
-    const prev = () => {
-        if (counter - 1 >= 0) { setCounter(counter - 1); }
-        else { setCounter(chapter.length - 1); }
-    };
-    function getData() {
-        axios(url + id)
-            .then(res => {
-                setChapter(res.data.chapter)
-                console.log(res.data)
-            })
+  const { id, page } = useParams();
+  console.log(id,page)
+  const [counter, setCounter] = useState(0);
+  const [chapter, setChapter] = useState({});
 
-            .catch((err) => console.log(err))
+  const next = () => {
+    if (counter + 1 < chapter.pages.length) {
+      setCounter(counter + 1);
+    } else {
+      setCounter(0);
     }
-    useEffect(() => {
-        getData()
-    }, [])
+  };
 
+  const prev = () => {
+    if (counter - 1 >= 0) {
+      setCounter(counter - 1);
+    } else {
+      setCounter(chapter.pages.length - 1);
+    }
+  };
 
-    return (
+  useEffect(() => {
+    axios.get(`http://localhost:8000/chapters/${id}`)
+      .then((res) => {
+        setChapter(res.data.chapter);
+        console.log(res.data)
+      })
+      .catch((err) => console.log(err));
+  }, [id]);
 
-        <div className=' h-screen flex items-center justify-center'>
-            <img className=' h-3/4 w-full object-cover' src='../public/image/test-img.jpg' alt="" />
+  return (
+    <div className="h-screen flex flex-col items-center justify-center">
+      <button onClick={prev}>Previous Page</button>
+      <button onClick={next}>Next Page</button>
+      {chapter?.pages.length > 0 ? (
+        <div>
+          <h2>Chapter Title: {chapter.title}</h2>
+          <p>Page {counter + 1} of {chapter.pages.length}</p>
+          <p>{chapter.pages[counter]}</p>
         </div>
-    )
-}
+      ) : (
+        <p>Loading...</p>
+      )}
+    </div>
+  );
+};
 
-export default Page
+export default Page;
