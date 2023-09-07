@@ -65,19 +65,18 @@ const Page = () => {
     return (
         <div className="h-screen flex flex-col items-center justify-center relative">
 
-            <p>Previous Page</p>
-
-
-
-            <p>Next Page</p>
+    
 
             {chapter?.pages?.length > 0 ? (
                 <div>
-                    <h2>Chapter Title: {chapter?.title}</h2>
-                    <p>Page {counter} of {chapter?.pages?.length}</p>
+                    <div className='flex text-white justify-center'>
+                        <p className='text-xs'>Page {counter} of {chapter?.pages?.length}</p>
+                        <h2 className='text-xs'>Chapter Title: {chapter?.title}</h2>
+                    </div>
+                    
                     {chapter?.pages[counter - 1] ? (
                         <div className="relative">
-                            <img src={chapter?.pages[counter - 1]} className="w-full lg:w-11/12 xl:w-5/6" alt={`Page ${counter + 1}`} />
+                            <img src={chapter?.pages[counter - 1]} className="w-full mt-10 lg:w-11/12 xl:w-5/6" alt={`Page ${counter + 1}`} />
 
 
                             <svg onClick={next} className='absolute right-arrow right-5 top-1/2 transform -translate-y-1/2 ' width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">

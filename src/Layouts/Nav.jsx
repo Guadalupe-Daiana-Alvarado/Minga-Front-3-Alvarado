@@ -15,10 +15,10 @@ const Nav = () => {
   )
   return (
     <>
-    <nav className='w-full h-24  flejustify-between p-5'>
-    <div className='flex w-full justify-between '>
-      <img onClick={()=>setOpen(true)} className='cursor-pointer' src={menu} alt="menu" />
-      <img src="../../image/Logo (1).png" alt="logo" />
+    <nav className='w-full h-24 bg-pink-400 flejustify-between p-5'>
+    <div className='flex w-full  justify-between '>
+      <img onClick={()=>setOpen(true)} className='cursor-pointer w-10 object-contain ' src={menu} alt="menu"  />
+      <img src="../../image/Logo (1).png" className="w-10 object-contain" alt="logo" />
     </div>
     </nav>
     {open && <Drawer/>}
