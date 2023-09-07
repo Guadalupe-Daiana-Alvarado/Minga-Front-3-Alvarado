@@ -5,6 +5,8 @@ import Registre from '../Pages/Registre'
 import SignIn from '../Pages/SignIn'
 import Layout from '../Layouts/Layout'
 import Mangas from '../Pages/Mangas'
+import MangaDetail from '../Pages/MangaDetail'
+import ChapterListTab from '../components/ChapterListTab'
 
     const Router = createBrowserRouter([
        
@@ -17,16 +19,24 @@ import Mangas from '../Pages/Mangas'
                 element: <Index/>
             },
             {
-                path: '/Registre',
+                path: '/registre',
                 element: <Registre/>
             },
             {
-                path: '/SignIn',
+                path: '/signIn',
                 element: <SignIn/>
             },
             {
-                path: '/Mangas',
+                path: '/mangas',
                 element: <Mangas/>
+            },
+            {
+                path: '/manga/:id',
+                element: <MangaDetail/>
+            },
+            {
+                path: '/chapters',
+                element: <ChapterListTab/>
             },
         ]
        }
