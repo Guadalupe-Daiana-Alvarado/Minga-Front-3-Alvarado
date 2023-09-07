@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate,useLocation } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 
 
@@ -7,39 +7,49 @@ const Page = () => {
     const { id, page } = useParams();
     const navigate = useNavigate()
     const location = useLocation()
-    console.log(location.pathname.split('/')[location.pathname.split('/').length-1])
-    function notCero (){
-        if (page == 0){
-            navigate(location.pathname.replace("0","1"))
+    console.log(location.pathname.split('/')[location.pathname.split('/').length - 1])
+    function notCero() {
+        if (page == 0) {
+            navigate(location.pathname.replace("0", "1"))
         }
     }
     console.log(id, page)
     // counter = variable de estado
     // setCounter = funcion que actualiza  el estado// 
-    const [counter, setCounter] = useState(page - 1);
+    const [counter, setCounter] = useState(Number(page));
     const [chapter, setChapter] = useState({});
 
     //  NEXT ,funcion que le permite al usuario navegar hacia delante y hacia atras,
     // entre paginas del capitulo//
     const next = () => {
-        if (counter + 1 < chapter.pages.length) {
+        if (counter < chapter.pages.length) {
             setCounter(counter + 1);
             navigate(`/chapter/${id}/${counter + 1}`)
         } else {
-            setCounter(0);
+            setCounter(1);
+            navigate(`/chapter/${chapter.nextChapter}/1`)
         }
     };
 
-    //  Prev  ,funcion que le permite al usuario navegar hacia delante y hacia atras,
-    // entre paginas del capitulo//
+    console.log(chapter)
+
     const prev = () => {
-        if (counter - 1 >= 0) {
+        if (counter -1 >= 1) {
+            // Reducir el contador en 1 si es mayor que 0
             setCounter(counter - 1);
-            navigate(`/chapter/${id}/${counter - 1}`)
+            // Navegar a la página anterior del capítulo actual
+            navigate(`/chapter/${id}/${counter - 1}`);
+        } else if (chapter.previousChapter && counter == 1) {
+            // Si el contador es 0 (estamos en la primera página) y hay un capítulo anterior
+            // Navegar al capítulo anterior y establecer counter en 1 (primera página del nuevo capítulo)
+            navigate(`/chapter/${chapter.previousChapter}/1`);
+            setCounter(1);
         } else {
-            setCounter(chapter.pages.length - 1);
+            // Si el contador es 0 y no hay un capítulo anterior, podrías tomar otra acción, como redirigir a la página de detalles del manga.
+            navigate(`/manga/${id}`);
         }
     };
+    
 
     useEffect(() => {
         axios.get(`http://localhost:8000/chapters/${id}`)
@@ -48,26 +58,25 @@ const Page = () => {
                 console.log(res.data)
             })
             .catch((err) => console.log(err));
-            notCero()
-            
-    }, [counter]);
+        notCero()
+
+    }, [id]);
 
     return (
         <div className="h-screen flex flex-col items-center justify-center relative">
 
-            <p>Previous Page</p>
-
-
-
-            <p>Next Page</p>
+    
 
             {chapter?.pages?.length > 0 ? (
                 <div>
-                    <h2>Chapter Title: {chapter?.title}</h2>
-                    <p>Page {counter + 1} of {chapter?.pages?.length}</p>
-                    {chapter?.pages[counter] ? (
+                    <div className='flex text-white justify-center'>
+                        <p className='text-xs'>Page {counter} of {chapter?.pages?.length}</p>
+                        <h2 className='text-xs'>Chapter Title: {chapter?.title}</h2>
+                    </div>
+                    
+                    {chapter?.pages[counter - 1] ? (
                         <div className="relative">
-                            <img src={chapter?.pages[counter]} className="w-full lg:w-11/12 xl:w-5/6" alt={`Page ${counter + 1}`} />
+                            <img src={chapter?.pages[counter - 1]} className="w-full mt-10 lg:w-11/12 xl:w-5/6" alt={`Page ${counter + 1}`} />
 
 
                             <svg onClick={next} className='absolute right-arrow right-5 top-1/2 transform -translate-y-1/2 ' width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">
