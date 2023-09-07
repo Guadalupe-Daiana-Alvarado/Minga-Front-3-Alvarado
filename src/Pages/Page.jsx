@@ -31,23 +31,25 @@ const Page = () => {
         }
     };
 
+    console.log(chapter)
 
     const prev = () => {
-        if (counter - 1 >= 0) {
+        if (counter -1 >= 1) {
             // Reducir el contador en 1 si es mayor que 0
             setCounter(counter - 1);
             // Navegar a la página anterior del capítulo actual
             navigate(`/chapter/${id}/${counter - 1}`);
+        } else if (chapter.previousChapter && counter == 1) {
+            // Si el contador es 0 (estamos en la primera página) y hay un capítulo anterior
+            // Navegar al capítulo anterior y establecer counter en 1 (primera página del nuevo capítulo)
+            navigate(`/chapter/${chapter.previousChapter}/1`);
+            setCounter(1);
         } else {
-            // Si el contador es 1 o menos (estamos en la primera página o menos),
-            // navegar hacia el detalle de un manga que coincida con el manga actual
-            // Esto podría redirigir a la página de detalles del manga o tomar otra acción
+            // Si el contador es 0 y no hay un capítulo anterior, podrías tomar otra acción, como redirigir a la página de detalles del manga.
             navigate(`/manga/${id}`);
         }
     };
-
-
-
+    
 
     useEffect(() => {
         axios.get(`http://localhost:8000/chapters/${id}`)
