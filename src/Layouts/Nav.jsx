@@ -14,14 +14,14 @@ const Nav = () => {
 
   )
   return (
-    <>
-    
+    <>    
     <nav className=' h-24 bg-trabsparent flex w-full justify-between p-5'>
     <div className='flex w-full justify-between '>
       <img onClick={()=>setOpen(true)} className='cursor-pointer' src={menu} alt="menu" />
       <img src="/image/Logo (1).png" alt="logo" />
     </div>
     </nav>
+
     {open && <Drawer/>}
     </>
   )

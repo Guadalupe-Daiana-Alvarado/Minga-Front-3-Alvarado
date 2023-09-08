@@ -11,6 +11,7 @@ const Display = () => {
         <Link to="/Registre" className='text-pink-400  bg-white p-1 w-48  rounded-md font-semibold text-2xl'>Register</Link>
         <Link to="/SignIn" className='text-pink-400  bg-white p-1 w-48  rounded-md font-semibold text-2xl'>Sign In</Link>
         <Link to={isLoggedIn ? "/Mangas" : "/NotAllowed"} className='text-pink-400  bg-white p-1 w-48  rounded-md font-semibold text-2xl'>Mangas</Link>
+        <Link to="/Page" className='text-pink-400  bg-white p-1 w-48  rounded-md font-semibold text-2xl'>Pages</Link>
       </div>
     </>
   );

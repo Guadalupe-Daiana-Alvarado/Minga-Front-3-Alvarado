@@ -8,7 +8,7 @@ import NavFooter from '../components/NavFooter'
 
 const Footer = () => {
     return (
-        <footer >
+        <footer className=" mt-20" >
             <div className="w-full h-3  mt-5 flex-col ">
                 <div>
                     <img src={ImagenFooter} alt="imagen-footer" />
