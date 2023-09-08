@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Content = (props) => {
   const { manga, chapters, hasPrevPage, hasNextPage, showChapters, onPageChange } = props;
@@ -34,7 +35,7 @@ const Content = (props) => {
                     alt='cover_chapter'
                   />
                   <div className='flex flex-col ml-2 gap-2'>
-                    <a href={`/chapters/${chapter?.id}/${chapter?.page}`}>{chapter?.title}</a>
+                    <Link to={`/chapter/${chapter?._id}/1`}>{chapter?.title}</Link>
                     <div className='flex'>
                       <img src='../public/image/icon_comment.png' alt='icon_comment' />
                       <p>N° XX</p>

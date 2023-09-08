@@ -25,7 +25,7 @@ const Router = createBrowserRouter([
             },
             {
 
-                path: '/registre',
+                path: '/register',
                 element: <Register/>
 
             },
@@ -38,8 +38,8 @@ const Router = createBrowserRouter([
             {
                 path: 'authors/me',
                 element: <Author/>
-            },
-            {   
+            }, 
+            {
                 path: '/mangas',
                 element: <Mangas/>
             },
@@ -60,14 +60,14 @@ const Router = createBrowserRouter([
                 element: <MangaDetail/>
             },
             {
-                path: '/chapters',
+                path: '/chapter',
                 element: <ChapterListTab/>
             },
 
 
              {
                 path: '/chapter/:id/:page',
-                element: <Page />
+                element: <Page/>
             }         
         ]
     }
