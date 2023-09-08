@@ -48,13 +48,13 @@ const Author = () => {
           </h5>
         </div>
         <div>
-          <img className='w-12 h-10 lg:h-10 lg:mt-4' src='../../public/assets/images/pencil-alt.png' alt='' />
+          <img className='w-12 h-10 lg:h-10 lg:mt-4' src='../../public/image/pencil-alt.png' alt='' />
         </div>
       </div>
 
       <div className='flex flex-wrap justify-center items-center gap-4'>
         {mangas.length === 0 ? (
-          <img src='../../public/assets/images/Logo.svg' alt='' />
+          <img src='../../public/image/Logo (1).png' alt='' />
         ) : showNewMangas ? (
           mangas.slice(0, 4).map((manga) => (
             <div key={manga._id}>
