@@ -10,9 +10,9 @@ const ChapterListTab = ({ chapters, currentPage, onPageChange, hasPrevPage, hasN
       {/* Mapear y mostrar los capítulos */}
       {chapters.map((chapter) => (
         <div key={chapter._id} className="chapter-card">
-          <a href={`/chapter/${chapter._id}/${currentPage}`}>
+          <link href={`/chapter/${chapter._id}/${currentPage}`}>
             <img src={chapter.imageURL} alt={`Chapter ${chapter.number}`} />
-          </a>
+          </link>
         </div>
       ))}
 

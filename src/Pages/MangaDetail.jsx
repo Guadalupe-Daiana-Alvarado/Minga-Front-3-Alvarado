@@ -4,21 +4,18 @@ import axios from 'axios';
 import MangaCover from '../components/MangaCover.jsx';
 import EmojisDataManga from '../components/EmojisDataManga.jsx';
 import ButtonManga from '../components/ButtonManga.jsx';
-import Content from '../components/Content.jsx'
-const MangaDetail = () => {
-  // Obtiene el valor del parámetro :id de la URL
-  const { id } = useParams();
+import Content from '../components/Content.jsx';
 
-  // Define estados para el manga, capítulos y paginación
+const MangaDetail = () => {
+  const { id } = useParams();
   const [manga, setManga] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [chapters, setChapters] = useState([]);
   const [hasPrevPage, setHasPrevPage] = useState(false);
   const [hasNextPage, setHasNextPage] = useState(false);
   const [showChapters, setShowChapters] = useState(false);
-  // Efecto para cargar los detalles del manga
+ 
   useEffect(() => {
-    // Hacer una solicitud para obtener los detalles del manga
     axios.get(`http://localhost:8000/mangas/${id}`)
       .then((response) => {
         console.log(response);
@@ -30,9 +27,8 @@ const MangaDetail = () => {
       });
   }, [id]);
 
-  // Efecto para cargar los capítulos paginados
+  
   useEffect(() => {
-    // Hacer una solicitud para obtener los capítulos paginados
    axios.get(`http://localhost:8000/chapters/?manga_id=${id}&page=${currentPage}`)
       .then((response) => {
         setChapters(response.data.chapters);
@@ -47,40 +43,21 @@ const MangaDetail = () => {
 
   return (
     <div className='bg-gray-200'>
-      {/* Muestra la portada del manga */}
       <MangaCover title={manga?.title} cover_photo={manga?.cover_photo} categories={manga?.category_id.name} />
-
-      {/* Muestra los emojis y datos del manga */}
       <EmojisDataManga />
-
-      {/* Muestra los botones para alternar entre Manga y Capítulos */}
-      <ButtonManga {...{showChapters, setShowChapters}} />
-      <Content {...{manga, chapters, hasPrevPage, hasNextPage, showChapters}}/>
-        </div>
+      <ButtonManga {...{ showChapters, setShowChapters }} />
+      <Content
+        {...{
+          manga,
+          chapters,
+          hasPrevPage,
+          hasNextPage,
+          showChapters,
+          onPageChange: setCurrentPage, // Pasa setCurrentPage como onPageChange
+        }}
+      />
+    </div>
   );
 };
 
 export default MangaDetail;
-
-
-// import React, { useState } from 'react';
-// import MangaCover from '../components/MangaCover.jsx';
-// import EmojisDataManga from '../components/EmojisDataManga.jsx';
-// import ButtonManga from '../components/ButtonManga.jsx';
-
-// const MangaDetail = () => {
-//     return (
-//         <div className='bg-gray-200'>
-//            <MangaCover/>
-//            <EmojisDataManga/>
-//            <ButtonManga/>
-//         </div>
-//     );
-// }
-
-// export default MangaDetail
-
-
-
-
-

@@ -11,7 +11,7 @@ const Footer = () => {
         <footer >
             <div className="w-full h-3  mt-5 flex-col ">
                 <div>
-                    <img src={ImagenFooter} alt="imagen-footer" />
+                    <img className='w-full' src={ImagenFooter} alt="imagen-footer" />
                 </div>
 
                 <div className="w-full flex justify-around items-center">
