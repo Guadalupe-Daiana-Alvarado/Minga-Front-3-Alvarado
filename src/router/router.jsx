@@ -26,20 +26,20 @@ const Router = createBrowserRouter([
             {
 
                 path: '/registre',
-                element: <Registre/>
+                element: <Register/>
 
             },
             {
                 path: '/signIn',
                 element: <SignIn/>
             },
-            {
+            
 
             {
                 path: 'authors/me',
                 element: <Author/>
-            }
-
+            },
+            {   
                 path: '/mangas',
                 element: <Mangas/>
             },
