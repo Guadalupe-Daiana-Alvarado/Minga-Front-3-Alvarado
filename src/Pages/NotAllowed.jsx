@@ -1,3 +1,4 @@
+
 import React from 'react'
 import Carrousel from '../components/Carrousel'
 
@@ -13,4 +14,5 @@ import Carrousel from '../components/Carrousel'
     </>
   )
 }
+
 export default NotAllowed
