@@ -5,9 +5,10 @@ import Registre from '../Pages/Registre'
 import SignIn from '../Pages/SignIn'
 import Layout from '../Layouts/Layout'
 import Mangas from '../Pages/Mangas'
+import MangaDetail from '../Pages/MangaDetail'
+import ChapterListTab from '../components/ChapterListTab'
 import NotAllowed from '../Pages/NotAllowed'
 import Page from '../Pages/Page'
-
 
 const Router = createBrowserRouter([
 
@@ -36,22 +37,27 @@ const Router = createBrowserRouter([
                 element: <Mangas/>
 
             },
-            {
-                path: '/manga/:_id',
-                element: <Mangas/>
 
-            },
             {
                 path: '/notAllowed',
                 element: <NotAllowed/>
 
             },
 
+            {
+                path: '/manga/:id',
+                element: <MangaDetail/>
+            },
+            {
+                path: '/chapters',
+                element: <ChapterListTab/>
+            },
+
+
              {
                 path: '/chapter/:id/:page',
                 element: <Page />
             }         
-
         ]
     }
 
