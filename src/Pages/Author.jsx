@@ -17,8 +17,9 @@ const Author = () => {
   }
 
   function getDataMangas() {
-    axios("http://localhost:8000/mangas/news")
+    axios("http://localhost:8000/mangas?news")
       .then((res) => {
+        console.log(res.data.mangas)
         setMangas(res.data.mangas);
       })
       .catch((error) => console.log(error));
