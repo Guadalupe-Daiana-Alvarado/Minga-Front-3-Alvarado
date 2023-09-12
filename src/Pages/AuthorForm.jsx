@@ -181,7 +181,7 @@ const AuthorForm = () => {
             <li>
               <ButtonForm
                 title="Send" // Puedes ajustar el título según sea necesario
-                url="http://localhost:8000/authors/create" // Puedes ajustar la URL a tu backend
+                url="http://localhost:8000/authors/ss" // Puedes ajustar la URL a tu backend
                 show={show} // Pasa el estado show si es necesario
                 setShow={setShow} // Pasa la función setShow si es necesario
               />
