@@ -1,7 +1,7 @@
 import React from 'react'
 import { createBrowserRouter } from 'react-router-dom'
 import Index from '../Pages/Index'
-import Register from '../Pages/Registre'
+import AuthorForm from '../Pages/AuthorForm'
 import SignIn from '../Pages/SignIn'
 import Layout from '../Layouts/Layout'
 import Mangas from '../Pages/Mangas'
@@ -10,6 +10,7 @@ import MangaDetail from '../Pages/MangaDetail'
 import ChapterListTab from '../components/ChapterListTab'
 import NotAllowed from '../Pages/NotAllowed'
 import Page from '../Pages/Page'
+import NewRole from '../Pages/NewRole'
 import Login from '../components/login'
 
 
@@ -26,49 +27,57 @@ const Router = createBrowserRouter([
             },
             {
 
-                path: '/register',
-                element: <Register/>
+                path: '/author-form',
+                element: <AuthorForm />
 
+            },
+            {
+
+                path: '/author',
+                element: <AuthorForm />
+
+            },
+            {
+                path: 'authors/me',
+                element: <Author />
+            }, 
+            {
+                path: '/newRole',
+                element: <NewRole />
             },
             {
                 path: '/signIn',
-                element: <SignIn/>
+                element: <SignIn />
             },
-            
 
             {
-                path: 'authors/me',
-                element: <Author/>
-            }, 
-            {
                 path: '/mangas',
-                element: <Mangas/>
+                element: <Mangas />
             },
             {
                 path: '/mangas/:page',
-                element: <Mangas/>
+                element: <Mangas />
 
             },
 
             {
                 path: '/notAllowed',
-                element: <NotAllowed/>
+                element: <NotAllowed />
 
             },
 
             {
                 path: '/manga/:id',
-                element: <MangaDetail/>
+                element: <MangaDetail />
             },
             {
                 path: '/chapter',
-                element: <ChapterListTab/>
+                element: <ChapterListTab />
             },
 
-
-             {
+            {
                 path: '/chapter/:id/:page',
-                element: <Page/>
+                element: <Page />
             },
             {
                 path: '/login',
@@ -80,4 +89,5 @@ const Router = createBrowserRouter([
 ])
 
 export default Router
+
 
