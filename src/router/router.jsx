@@ -1,7 +1,7 @@
 import React from 'react'
 import { createBrowserRouter } from 'react-router-dom'
 import Index from '../Pages/Index'
-import Register from '../Pages/Registre'
+import AuthorForm from '../Pages/AuthorForm'
 import SignIn from '../Pages/SignIn'
 import Layout from '../Layouts/Layout'
 import Mangas from '../Pages/Mangas'
@@ -25,20 +25,29 @@ const Router = createBrowserRouter([
             },
             {
 
-                path: '/register',
-                element: <Register />
+                path: '/author-form',
+                element: <AuthorForm />
 
+            },
+            {
+
+                path: '/author',
+                element: <AuthorForm />
+
+            },
+            {
+                path: 'authors/me',
+                element: <Author />
+            }, 
+            {
+                path: '/newRole',
+                element: <NewRole />
             },
             {
                 path: '/signIn',
                 element: <SignIn />
             },
 
-
-            {
-                path: 'authors/me',
-                element: <Author />
-            },
             {
                 path: '/mangas',
                 element: <Mangas />
@@ -68,10 +77,7 @@ const Router = createBrowserRouter([
                 path: '/chapter/:id/:page',
                 element: <Page />
             },
-            {
-                path: '/newRole',
-                element: <NewRole />
-            }
+           
         ]
     }
 
