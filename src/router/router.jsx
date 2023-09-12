@@ -10,7 +10,7 @@ import MangaDetail from '../Pages/MangaDetail'
 import ChapterListTab from '../components/ChapterListTab'
 import NotAllowed from '../Pages/NotAllowed'
 import Page from '../Pages/Page'
-
+import NewRole from '../Pages/NewRole'
 
 const Router = createBrowserRouter([
 
@@ -26,53 +26,57 @@ const Router = createBrowserRouter([
             {
 
                 path: '/register',
-                element: <Register/>
+                element: <Register />
 
             },
             {
                 path: '/signIn',
-                element: <SignIn/>
+                element: <SignIn />
             },
-            
+
 
             {
                 path: 'authors/me',
-                element: <Author/>
-            }, 
+                element: <Author />
+            },
             {
                 path: '/mangas',
-                element: <Mangas/>
+                element: <Mangas />
             },
             {
                 path: '/mangas/:page',
-                element: <Mangas/>
+                element: <Mangas />
 
             },
 
             {
                 path: '/notAllowed',
-                element: <NotAllowed/>
+                element: <NotAllowed />
 
             },
 
             {
                 path: '/manga/:id',
-                element: <MangaDetail/>
+                element: <MangaDetail />
             },
             {
                 path: '/chapter',
-                element: <ChapterListTab/>
+                element: <ChapterListTab />
             },
 
-
-             {
+            {
                 path: '/chapter/:id/:page',
-                element: <Page/>
-            }         
+                element: <Page />
+            },
+            {
+                path: '/newRole',
+                element: <NewRole />
+            }
         ]
     }
 
 ])
 
 export default Router
+
 
