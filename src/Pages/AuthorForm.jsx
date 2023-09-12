@@ -63,10 +63,6 @@ import ButtonForm from '../components/ButtonForm';
 //import Alert from './Alert'; // Importa el componente Alert
 
 
-
-
-
-
 const AuthorForm = () => {
   const firstNameRef = useRef("Lucas Ezequiel");
   const lastNameRef = useRef("Silva");
