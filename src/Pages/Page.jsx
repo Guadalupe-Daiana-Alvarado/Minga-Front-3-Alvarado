@@ -7,7 +7,6 @@ const Page = () => {
     const { id, page } = useParams();
     const navigate = useNavigate()
     const location = useLocation()
-    console.log(location.pathname.split('/')[location.pathname.split('/').length - 1])
     function notCero() {
         if (page == 0) {
             navigate(location.pathname.replace("0", "1"))
@@ -66,7 +65,7 @@ const Page = () => {
         <div className="h-screen flex flex-col items-center justify-center relative">
 
     
-
+            {/* Verifica si hay una pagina en ele stado actual */}
             {chapter?.pages?.length > 0 ? (
                 <div>
                     <div className='flex text-white justify-center'>
