@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import flecha1 from '../../public/image/flecha.png';
+import tarjeta1 from '../../public/image/tarjeta2.png';
+import tarjeta2 from '../../public/image/tarjeta1.png';
 import flecha2 from '../../public/image/flecha.png';
 import axios from 'axios'
 import { useEffect } from 'react';
 
 
 const Carrousel = () => {
-  let url = "http://localhost:8000/categories"
+  let url = "https://minga-back-vyqy.onrender.com/categories"
   /*  let titulos = ["pepito", "juancito", "carlitos", "menganito"]; */
   let [counter, setCounter] = useState(0);
   let [categories, setCategories] = useState([])
@@ -30,13 +32,11 @@ const Carrousel = () => {
   function getData() {
     axios(url)
       .then(res => {
-        setCategories(res.data)
-        console.log(res)
+        setCategories(res.data.categories)
 
       })
       .catch((err) => console.log(err))
   }
-
   useEffect(() => {
     getData()
   }, [])
@@ -61,6 +61,8 @@ const Carrousel = () => {
         <h2 className='text-white text-3xl m-5'>{categories[counter]?.name} </h2>
         <p className='w-9/12 text-white font-serif '>{categories[counter]?.description}</p>
       </div>
+
+      
 
       <div className='pt-36 pr-3'>
         <img onClick={next} className='cursor-pointer w-8 p-2 rounded-full bg-white' src={flecha2} alt="flecha2" />
