@@ -1,12 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+// M01- store//
+// importacion de metedos de redux//
+import { useSelector, useDispatch } from 'react-redux'
+import setChapterData from '../../redux/actions/Chapters.js'
 
 const Page = () => {
   const { id, page } = useParams();
-  console.log(id,page)
+  console.log(id, page)
   const [counter, setCounter] = useState(0);
   const [chapter, setChapter] = useState({});
+
+  //destructurando {number, title } y aplicando el metodo de redux useSelector //
+  const { number, title } = useSelector((store) => store.chaptersReducer);
+  const dispatch = useDispatch();
 
   const next = () => {
     if (counter + 1 < chapter.pages.length) {
@@ -27,8 +35,8 @@ const Page = () => {
   useEffect(() => {
     axios.get(`http://localhost:8000/chapters/${id}`)
       .then((res) => {
-        setChapter(res.data.chapter);
-        console.log(res.data)
+        dispatch(setChapterData(number, title));
+
       })
       .catch((err) => console.log(err));
   }, [id]);
