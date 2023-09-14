@@ -10,6 +10,7 @@ import MangaDetail from '../Pages/MangaDetail'
 import ChapterListTab from '../components/ChapterListTab'
 import NotAllowed from '../Pages/NotAllowed'
 import Page from '../Pages/Page'
+import ChapterForm from '../Pages/ChapterForm'
 
 
 const Router = createBrowserRouter([
@@ -59,6 +60,12 @@ const Router = createBrowserRouter([
                 path: '/manga/:id',
                 element: <MangaDetail/>
             },
+            
+            {
+                path: '/manga/:id/chapter-form',
+                element: <ChapterForm/>
+            },
+
             {
                 path: '/chapter',
                 element: <ChapterListTab/>

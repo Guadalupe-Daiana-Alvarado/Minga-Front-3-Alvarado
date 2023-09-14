@@ -12,7 +12,7 @@ const Display = () => {
         <Link to="/register" className='text-pink-400  bg-white p-1 w-48  rounded-md font-semibold text-2xl'>Register</Link>
         <Link to="/signin" className='text-pink-400  bg-white p-1 w-48  rounded-md font-semibold text-2xl'>Sign In</Link>
         <Link to={isLoggedIn ? "/Mangas" : "/NotAllowed"} className='text-pink-400  bg-white p-1 w-48  rounded-md font-semibold text-2xl'>Mangas</Link>
-        <Link to="/authors/me" className='text-2xl w-1/2 rounded-xl font-bold hover:bg-white cursor-pointer'>Profile</Link>
+        <Link to="/authors/me" className='text-pink-400  bg-white p-1 w-48  rounded-md font-semibold text-2xl cursor-pointer'>Profile</Link>
       </div>
     </>
   );
