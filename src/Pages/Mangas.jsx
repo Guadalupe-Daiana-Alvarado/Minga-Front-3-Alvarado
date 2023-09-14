@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import img from '../../public/image/search.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { filters } from "../redux/actions/mangasAction";
 
