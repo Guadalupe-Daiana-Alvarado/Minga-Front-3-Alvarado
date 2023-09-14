@@ -11,11 +11,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
-<<<<<<< HEAD
-    "axios": "^1.4.0",
-=======
     "axios": "^1.5.0",
->>>>>>> parent of fe7360e (Merge pull request #17 from Guadalupe-Daiana-Alvarado/revert-14-m-05-sprint-3)
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.1.2",

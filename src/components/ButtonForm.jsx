@@ -1,16 +1,3 @@
-<<<<<<< HEAD
-// ButtonForm.jsx
-import React from 'react';
-
-const ButtonForm = ({ label }) => {
-    return (
-        <button type="submit" className="btn btn-primary">
-            {label}
-        </button>
-    );
-}
-=======
-
 import React, { useState } from 'react';
 //import Alert from './Alert'; // Asegúrate de importar correctamente el componente Alert
 
@@ -45,9 +32,9 @@ const ButtonForm = ({ title, url, show, setShow }) => {
 
   return (
     <div>
-      <button 
-className='p-3 text-white font-bold ml-5  w-28 bg-pink-400 rounded-full'
- onClick={handleFormSubmit}>{title}</button>
+      <button
+        className='p-3 text-white font-bold ml-5  w-28 bg-pink-400 rounded-full'
+        onClick={handleFormSubmit}>{title}</button>
       {show && (
         <Alert
           success={success}
@@ -62,6 +49,5 @@ className='p-3 text-white font-bold ml-5  w-28 bg-pink-400 rounded-full'
     </div>
   );
 };
->>>>>>> parent of fe7360e (Merge pull request #17 from Guadalupe-Daiana-Alvarado/revert-14-m-05-sprint-3)
 
 export default ButtonForm;
