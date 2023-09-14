@@ -8,10 +8,10 @@ const ButtonsSocial = () => {
     return (
 
         <div className='flex justify-around gap-15 pb-5 '>
-            <img src={Facebook} alt="Facebook" />
-            <img src={Twitter} alt="Twitter" />
-            <img src={Vimeo} alt="Vimeo" />
-            <img src={Youtube} alt="Youtube" />
+            <img className='cursor-pointer' src={Facebook} alt="Facebook" />
+            <img className='cursor-pointer' src={Twitter} alt="Twitter" />
+            <img className='cursor-pointer' src={Vimeo} alt="Vimeo" />
+            <img className='cursor-pointer' src={Youtube} alt="Youtube" />
 
         </div>
     )
