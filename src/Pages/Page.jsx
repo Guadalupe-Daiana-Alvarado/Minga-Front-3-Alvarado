@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import setChapterData from '../../redux/actions/Chapters.js'
 
 
+
 const Page = () => {
   const { id, page } = useParams();
   const navigate = useNavigate()
@@ -21,6 +22,9 @@ const Page = () => {
   // setCounter = funcion que actualiza  el estado// 
   const [counter, setCounter] = useState(Number(page));
   const [chapter, setChapter] = useState({});
+
+  const dispatch = useDispatch()
+  const { number, title } = useSelector((store) => store.chaptersReduce)
 
   //  NEXT ,funcion que le permite al usuario navegar hacia delante y hacia atras,
   // entre paginas del capitulo//
@@ -57,7 +61,7 @@ const Page = () => {
   useEffect(() => {
     axios.get(`http://localhost:8000/chapters/${id}`)
       .then((res) => {
-        setChapter(res.data);
+        useDispatch(setChapterData(number, title));
         console.log(res.data)
       })
       .catch((err) => console.log(err));
