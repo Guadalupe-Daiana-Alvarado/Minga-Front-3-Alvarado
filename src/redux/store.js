@@ -1,9 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
-import me_authors from "./reducers/me_authors";
+import me_authors from "../redux/reducers/me_authors.js";
+import mangaReducer from '../redux/reducers/mangaReduce.js';
 
-//Recibe los datos del despacho
-export const store = configureStore({ //Lo que va entre llaves son las options
-  reducer:{
-    author_reduce: me_authors
-  }
-})
+const rootReducer = {
+  author_reduce: me_authors,
+  manga: mangaReducer,
+  // Otros reductores si los tienes
+};
+
+export const store = configureStore({
+  reducer: rootReducer,
+  // Otras configuraciones de Redux Toolkit si las tienes
+});

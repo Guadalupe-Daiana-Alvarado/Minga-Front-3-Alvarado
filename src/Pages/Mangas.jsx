@@ -54,7 +54,7 @@ function Mangas() {
     getMangas()
     getCategories()
   }, [text, check, page]);
-
+console.log(mangas)
   return (
     <>
     {/* INPUT DE BUSQUEDA */}
