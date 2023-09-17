@@ -2,8 +2,8 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import authorData from '../redux/actions/me_authors.js';
-import mangasData from '../redux/actions/manga_news.js';
+import authorData from '../../redux/actions/me_authors.js';
+import mangasData from '../../redux/actions/manga_news.js';
 
 const Author = () => {
   const [showNewMangas, setShowNewMangas] = useState(true);

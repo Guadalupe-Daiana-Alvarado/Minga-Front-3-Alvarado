@@ -5,7 +5,7 @@ const initialState = {
   profile: {} 
 }
 // Se actualiza el estado
-const me_authors = createReducer(initialState, (builder) => 
+const me_authors = createReducer(initialState, (builder) =>
   builder
     .addCase(authorData, (state, action) =>{
       const newState = {
@@ -13,7 +13,6 @@ const me_authors = createReducer(initialState, (builder) =>
         profile: action.payload.info
       }
       return newState
-    } )
+    })
 )
-
 export default me_authors
