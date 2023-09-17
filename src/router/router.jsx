@@ -8,10 +8,9 @@ import Mangas from '../Pages/Mangas'
 import Author from '../Pages/Author'
 import MangaDetail from '../Pages/MangaDetail'
 import ChapterListTab from '../components/ChapterListTab'
-import NotAllowed from '../Pages/NotAllowed'
+import NotAllow from '../Pages/NotAllow'
 import Page from '../Pages/Page'
 import Register from '../Pages/Register'
-import NotAllow from '../Pages/NotAllow'
 import NewRole from '../Pages/NewRole'
 import Login from '../components/login'
 
@@ -59,11 +58,6 @@ const Router = createBrowserRouter([
             {
                 path: '/mangas/:page',
                 element: <Mangas />
-            },
-
-            {
-                path: '/notAllowed',
-                element: <NotAllowed />
             },
 
             {

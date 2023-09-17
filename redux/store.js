@@ -1,11 +1,16 @@
-import { combineReducers } from 'redux';
 import chaptersReducer from '../redux/reducers/chapter'
 import me_authors from "./reducers/me_authors";
+import mangaNews from "./reducers/mangas_news";
+import { configureStore } from '@reduxjs/toolkit';
 
 // Combinar los reductores si hay otros//
-const rootReducer = combineReducers({
-    chapters: chaptersReducer,
-    author_reduce: me_authors,
+export const store = configureStore({
+    reducer: {
+        chapters: chaptersReducer,
+        author_reduce: me_authors,
+        mangasNews_reduce: mangaNews
+    }
+
     // Otros reductores aquí...
 });
 

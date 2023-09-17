@@ -1,17 +1,23 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-
+import { useSelector, useDispatch } from 'react-redux';
+import authorData from '../../redux/actions/me_authors.js';
+import mangasData from '../../redux/actions/manga_news.js';
 
 const Author = () => {
-  const [mangas, setMangas] = useState([]);
-  const [categories, setCategories] = useState([]);
   const [showNewMangas, setShowNewMangas] = useState(true);
+  const profile = useSelector((store) => store.author_reduce.profile);
+  console.log(profile)
+  const mangasNews = useSelector((store) => store.mangasNews_reduce.mangas_news);
+  const dispatchAuthors = useDispatch();
+  const dispatchMangasNews = useDispatch();
 
   function getDataAuthor() {
     axios("http://localhost:8000/authors/me")
       .then((res) => {
-        setCategories(res.data.author);
+        dispatchAuthors(authorData({ info: res.data.author }));
+        console.log(res.data.author);
       })
       .catch((error) => console.log(error));
   }
@@ -19,8 +25,8 @@ const Author = () => {
   function getDataMangas() {
     axios("http://localhost:8000/mangas?news")
       .then((res) => {
-        console.log(res.data.mangas)
-        setMangas(res.data.mangas);
+        console.log(res);
+        dispatchMangasNews(mangasData({ info_mangas: res.data.mangas }));
       })
       .catch((error) => console.log(error));
   }
@@ -38,14 +44,14 @@ const Author = () => {
     <>
       <div className='flex justify-center items-center mt-8 md:justify-start md:h-60 md:flex-col lg:mb-12'>
         <div className='flex flex-col justify-center items-center'>
-          <img src={categories?.photo} className=" w-20 h-12 lg:w-36 lg:h-28 rounded-full" alt='' />
+          <img src={profile?.photo} className="w-20 h-12 lg:w-36 lg:h-28 rounded-full" alt='' />
         </div>
         <div className='w-72 h-12 mx-4'>
           <h3 className='text-md lg:text-xl'>
-            {categories?.name} {categories?.last_name}
+            {profile?.name} {profile?.last_name}
           </h3>
           <h5 className='text-sm lg:text-lg'>
-            {categories?.city}, {categories?.country}
+            {profile?.city}, {profile?.country}
           </h5>
         </div>
         <div>
@@ -54,30 +60,32 @@ const Author = () => {
       </div>
 
       <div className='flex flex-wrap justify-center items-center gap-4'>
-        {mangas.length === 0 ? (
-          <img src='../../public/image/Logo (1).png' alt='' />
-        ) : showNewMangas ? (
-          mangas.slice(0, 4).map((manga) => (
-            <div key={manga._id}>
-              <Link to={`/mangas/${manga._id}`} className='hover:opacity-80 focus:opacity-80'>
-          <img className='w-52 lg:w-60 rounded-md' src={manga?.cover_photo} alt='' />
-            </Link>
-              <h1>{manga?.title}</h1>
-            </div>
-          ))
-        ) : (
-          mangas.slice(4, 8).map((manga) => (
-            <div key={manga._id}>
-               <Link to={`/mangas/${manga._id}`} className='hover:opacity-80 focus:opacity-80'>
-          <img className='w-52 h-60 lg:w-52 rounded-lg' src={manga?.cover_photo} alt='' />
+        {Array.isArray(mangasNews) && (
+          mangasNews.length === 0 ? (
+            <img src='../../public/image/Logo (1).png' alt='' />
+          ) : showNewMangas ? (
+            mangasNews.slice(0, 4).map((manga) => (
+              <div key={manga._id}>
+                <Link to={`/mangas/${manga._id}`} className='hover:opacity-80 focus:opacity-80'>
+                  <img className='w-52 lg:w-60 rounded-md' src={manga?.cover_photo} alt='' />
                 </Link>
-              <h1>{manga?.title}</h1>
-            </div>
-          ))
+                <h1>{manga?.title}</h1>
+              </div>
+            ))
+          ) : (
+            mangasNews.slice(4, 8).map((manga) => (
+              <div key={manga._id}>
+                <Link to={`/mangas/${manga._id}`} className='hover:opacity-80 focus:opacity-80'>
+                  <img className='w-52 h-60 lg:w-52 rounded-lg' src={manga?.cover_photo} alt='' />
+                </Link>
+                <h1>{manga?.title}</h1>
+              </div>
+            ))
+          )
         )}
       </div>
 
-      {mangas.length >= 8 && (
+      {Array.isArray(mangasNews) && mangasNews.length >= 8 && (
         <div className='flex mt-12 justify-center items-center'>
           <button
             className={`${

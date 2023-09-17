@@ -1,7 +1,7 @@
 // m01-store//
 // Importe aqui  el tipo de acción
 //reducers//
-import { setChapterData } from '../actions/Chapters';
+import setChapterData  from '../actions/Chapters.js';
 import { createReducer } from '@reduxjs/toolkit';
 
 // Estado inicial
