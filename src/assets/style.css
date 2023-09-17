@@ -1,0 +1,34 @@
+/* Estilos generales para la foto */
+.foto {
+  width: 100%; /* Por defecto, ocupa todo el ancho del contenedor */
+  height: auto; /* Ajusta la altura automáticamente */
+  background-image: url('/public/image/imagen-registro.svg');
+  background-size: cover; /* Ajusta el tamaño de fondo para cubrir el contenedor */
+  background-repeat: no-repeat; /* Evita la repetición de la imagen */
+}
+/* Estilos para dispositivos móviles (ancho de pantalla menor o igual a 768px) */
+@media (max-width: 768px) {
+  .foto {
+      display: none; /* Oculta la foto en dispositivos móviles */
+  }
+}
+
+/* Estilos para pantallas de escritorio (ancho de pantalla mayor a 768px) */
+@media (min-width: 769px) {
+  .container {
+      display: flex; /* Crea un contenedor flex para centrar la foto */
+      justify-content: center; /* Centra horizontalmente */
+      align-items: center; /* Centra verticalmente */
+      height: 100vh; /* Ajusta la altura del contenedor al 100% de la altura de la ventana */
+  }
+
+  .foto {
+      display: block; /* Muestra la foto en pantallas de escritorio */
+      width: 50%; /* Ocupa la mitad del contenedor */
+  }
+}
+
+/*<div class="container">
+          <div class="foto">
+          </div>
+        </div> */
