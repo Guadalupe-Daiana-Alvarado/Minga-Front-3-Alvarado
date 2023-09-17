@@ -25,7 +25,7 @@ const ChapterForm = () => {
       const { data } = await axios.post("http://localhost:8000/chapters/", newChapterData, {
 
                headers: {
-                   Authorization: "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NGYzYTg0YWMwMGU4OWQ0MTI3NWM5M2QiLCJlbWFpbCI6ImlnbmFAbWguY29tLmFyIiwiaWF0IjoxNjk0NjE4Mjk5LCJleHAiOjE2OTQ3MDQ2OTl9.oLO48xhEERMJS2j4d1kp4IXigqNilaHbjUzZ_zn4XYo"
+                   Authorization: "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NGYzYTg0YWMwMGU4OWQ0MTI3NWM5M2EiLCJlbWFpbCI6Imx1Y2FzQG1oLmNvbS5hciIsImlhdCI6MTY5NDcwMjE4NywiZXhwIjoxNjk0Nzg4NTg3fQ.tW6uQzOkD6qZOBs0NNJ3DaRxYEGAy0iLoUTjYgH7mzw"
                }
       
              }
@@ -66,74 +66,3 @@ const ChapterForm = () => {
 export default ChapterForm;
 
 
-
-
-
-
-// import React, { useState, useEffect, useRef } from 'react'
-// import Alert from '../components/Alert'
-// import axios from 'axios'
-// import { data } from 'autoprefixer'
-
-
-// const ChapterForm = () => {
-
-//   let [show, setShow] = useState(false)
-//   let [message, setMessage] = useState([])
-
-// const title = useRef()
-// const order = useRef()
-// const pages = useRef()
-// const handleForm = async () => {
-//   let inputTitle = title.current.value
-//   let inputPages = pages.current.value
-//   let inputOrder = order.current.value
-//   let newChapterData = {
-//     manga_id: "64f3aa96d9cc8ec6d82d73e9",
-//     title: inputTitle,
-//     order: inputOrder,
-//     pages: [inputPages]
-//   }
-//   try {
-//     let { data } = await axios.post("http://localhost:8000/chapters/", newChapterData, {
-
-//         headers: {
-//             Authorization: "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NGYzYTg0YWMwMGU4OWQ0MTI3NWM5M2QiLCJlbWFpbCI6ImlnbmFAbWguY29tLmFyIiwiaWF0IjoxNjk0NjE4Mjk5LCJleHAiOjE2OTQ3MDQ2OTl9.oLO48xhEERMJS2j4d1kp4IXigqNilaHbjUzZ_zn4XYo"
-//         }
-
-//       }
-// )
-//     console.log(data.message)
-//     }catch (error) {
-//     console.log(error)
-//     console.log(error.response.data.message)
-//     setMessage(error.response.data.message)
-//   }
-//   }
-
-
-
-//   useEffect(() => {
-
-//   }, [setShow])
-
-//   return (
-//     <div className='h-screen bg-slate-100 flex flex-col justify-center items-center'>
-//       <form action="" className='flex flex-col h-2/3 w-2/3 items-center'>
-//         <label htmlFor="" className='text-2xl pb-5'>New Chapter</label>
-//         <input type="text" className='border-b-2 border-neutral-400 bg-slate-100 text-xs pt-5 w-full md:w-1/2' ref={title} placeholder='  Insert title' />
-//         <input type="text" className='border-b-2 border-neutral-400 bg-slate-100 text-xs pt-5 w-full md:w-1/2' ref={order} placeholder='  Insert order' />
-//         <input type="text" className='border-b-2 border-neutral-400 bg-slate-100 text-xs pt-5 w-full md:w-1/2' ref={pages} placeholder='  Insert pages' />
-//         <button onClick={(e) => {
-//           e.preventDefault();
-//           handleForm();
-//           setShow(!show)
-//         }}
-//           className='bg-indigo-700 text-white font-semibold py-2 px-5 mt-20 rounded-full w-full md:w-1/2'>Send</button>
-//       </form>
-//       {show && <Alert show={show} message={message} data={data} setShow={setShow} />}
-//     </div>
-//   )
-// }
-
-// export default ChapterForm
