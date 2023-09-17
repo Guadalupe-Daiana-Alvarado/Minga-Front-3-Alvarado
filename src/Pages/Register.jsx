@@ -21,6 +21,7 @@ const Register = () => {
       password: password.current.value,
       photo: photo.current.value
     }
+    console.log(data)
 
     // Lógica de registro aquí...
     axios
@@ -93,9 +94,3 @@ const Register = () => {
   );
 }
 export default Register;
-
-
-
-
-
-

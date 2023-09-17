@@ -13,7 +13,7 @@ import Page from '../Pages/Page'
 import Register from '../Pages/Register'
 import NewRole from '../Pages/NewRole'
 import Login from '../components/login'
-
+import MangaForm from '../Pages/MangaForm'
 
 const Router = createBrowserRouter([
 
@@ -28,18 +28,14 @@ const Router = createBrowserRouter([
             },
             {
                 path: '/Register',
-                element: <Register />
+                element: <Register/>
             },
             {
                 path: '/author-form',
                 element: <AuthorForm />
             },
             {
-                path: '/author',
-                element: <AuthorForm />
-            },
-            {
-                path: 'authors/me',
+                path: '/authors/me',
                 element: <Author />
             },
             {
@@ -58,6 +54,12 @@ const Router = createBrowserRouter([
             {
                 path: '/mangas/:page',
                 element: <Mangas />
+            },
+
+            {
+                path: '/manga-form',
+                element: <MangaForm/>
+
             },
 
             {
