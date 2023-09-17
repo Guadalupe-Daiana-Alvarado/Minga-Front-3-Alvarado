@@ -9,9 +9,29 @@ import setChapterData from '../../redux/actions/Chapters.js'
 
 
 const Page = () => {
+
   const { id, page } = useParams();
+  const [counter, setCounter] = useState(Number(page));
+  const [chapter, setChapter] = useState({});
+  
+  const { number, title } = useSelector((store) => store.chapters)
   const navigate = useNavigate()
   const location = useLocation()
+  const dispatch = useDispatch() 
+
+  useEffect(() => {
+    axios.get(`http://localhost:8000/chapters/${id}`)
+      .then((res) => {
+        dispatch(setChapterData(number, title));
+        console.log('gffgjkjgnghjhg',res.data)
+        setChapter(res.data)
+
+      })
+      .catch((err) => console.log(err));
+    notCero()
+
+  }, [id]);
+
   function notCero() {
     if (page == 0) {
       navigate(location.pathname.replace("0", "1"))
@@ -20,11 +40,8 @@ const Page = () => {
   console.log(id, page)
   // counter = variable de estado
   // setCounter = funcion que actualiza  el estado// 
-  const [counter, setCounter] = useState(Number(page));
-  const [chapter, setChapter] = useState({});
-
-  const dispatch = useDispatch()
-  const { number, title } = useSelector((store) => store.chaptersReduce)
+  
+ 
 
   //  NEXT ,funcion que le permite al usuario navegar hacia delante y hacia atras,
   // entre paginas del capitulo//
@@ -38,7 +55,6 @@ const Page = () => {
     }
   };
 
-  console.log(chapter)
 
   const prev = () => {
     if (counter - 1 >= 1) {
@@ -58,17 +74,7 @@ const Page = () => {
   };
 
 
-  useEffect(() => {
-    axios.get(`http://localhost:8000/chapters/${id}`)
-      .then((res) => {
-        useDispatch(setChapterData(number, title));
-        console.log(res.data)
-      })
-      .catch((err) => console.log(err));
-    notCero()
-
-  }, [id]);
-
+ 
   return (
     <div className="h-screen flex flex-col items-center justify-center relative">
 

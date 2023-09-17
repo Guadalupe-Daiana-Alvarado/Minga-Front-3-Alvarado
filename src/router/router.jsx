@@ -28,7 +28,7 @@ const Router = createBrowserRouter([
             },
             {
                 path: '/Register',
-                element: <Register />
+                element: <Register/>
             },
             {
                 path: '/author-form',
