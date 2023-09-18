@@ -6,18 +6,23 @@ const Alert = ({ show, setShow, message, data }) => {
         {(message && message.length > 0) ? (
           message.map((errorMessage, index) => (
             <>
+            <div key={index}>
                 <h1
                   className='min-h-2/3 w-full text-center border-b-2 rounded-t-lg'
                 >
                   {errorMessage}
                 </h1>
+                </div>
+              
             </>
           ))
         ) : (
           data && data.message ? (
+          
             <h1 className='min-h-2/3 w-full text-center border-b-2 rounded-t-lg'>
               {data.message}
             </h1>
+           
           ) : null
         )}
         <button onClick={() => setShow(!show)} className='h-1/3 w-full rounded-b-lg text-blue-500'>

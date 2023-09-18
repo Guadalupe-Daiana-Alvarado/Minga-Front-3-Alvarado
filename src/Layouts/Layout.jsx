@@ -4,17 +4,17 @@ import Footer from '../Layouts/Footer'
 import { Outlet } from 'react-router-dom'
 
 
-const Layout = () => { 
+const Layout = () => {
 
   return (
     <>
-    <Nav/>
-    
-    <Outlet/>
-   
-    <Footer/>
-    </>    
-    
+      <Nav />
+
+      <Outlet />
+
+      <Footer />
+    </>
+
   )
 }
 
