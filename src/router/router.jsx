@@ -14,6 +14,7 @@ import Register from '../Pages/Register'
 import NewRole from '../Pages/NewRole'
 import Login from '../components/login'
 import MangaForm from '../Pages/MangaForm'
+import ChapterForm from "../Pages/ChapterForm"
 
 const Router = createBrowserRouter([
 
@@ -72,17 +73,40 @@ const Router = createBrowserRouter([
             },
 
             {
-                path: '/chapter/:id/:page',
-                element: <Page />
+                path: '/manga-form',
+                element: <MangaForm/>
+
             },
+
             {
-                path: '/NotAllow',
-                element: <NotAllow />
+                path: '/chapter',
+                element: <ChapterListTab />
+            },
+
+            {
+                path: '/manga/:id',
+                element: <MangaDetail/>
+            },
+            
+            {
+                path: '/manga/:id/chapter-form',
+                element: <ChapterForm/>
+            },
+
+            {
+                path: '/chapter',
+                element: <ChapterListTab/>
+            },
+
+
+             {
+                path: '/chapter/:id/:page',
+                element: <Page/>
             },
             {
                 path: '/login',
                 element: <Login />
-            }
+            }         
         ]
     }
 
