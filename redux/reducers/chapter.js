@@ -7,7 +7,8 @@ import { createReducer } from '@reduxjs/toolkit';
 // Estado inicial
 const initialState = {
     number: [],
-    title: [""]
+    title: [""],
+
 };
 
 // Reductor para cargar los estados globales number y title
@@ -26,5 +27,3 @@ const chaptersReducer = createReducer(initialState, (action) =>
 );
 
 export default chaptersReducer
-
-

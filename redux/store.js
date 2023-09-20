@@ -3,6 +3,8 @@ import me_authors from "./reducers/me_authors";
 import mangaNews from "./reducers/mangas_news";
 import { loginReducer } from './reducers/login';
 import { configureStore } from '@reduxjs/toolkit';
+import mangasReducer from './reducers/mangasReducer';
+
 
 // Combinar los reductores si hay otros//
 export const store = configureStore({
@@ -10,7 +12,8 @@ export const store = configureStore({
         chapters: chaptersReducer,
         author_reduce: me_authors,
         mangasNews_reduce: mangaNews,
-        user_reduce:loginReducer
+        user_reduce:loginReducer,
+        mangas : mangasReducer
     }
 
     // Otros reductores aquí...

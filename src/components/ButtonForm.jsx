@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Alert from './Alert';
+import Alert from './Alert'; // Asegúrate de importar correctamente el componente Alert
 
 const ButtonForm = ({ title, funcion, url, show, setShow }) => {
   const [success, setSuccess] = useState(false);
@@ -20,7 +20,7 @@ const ButtonForm = ({ title, funcion, url, show, setShow }) => {
             setError(false);
           }}
         />
-      )}
+      )} 
     </div>
   );
 };

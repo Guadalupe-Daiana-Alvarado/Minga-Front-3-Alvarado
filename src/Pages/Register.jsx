@@ -5,7 +5,7 @@ import Alert from '../components/Alert';
 import { useRef } from 'react';
 import axios from 'axios';
 import '../assets/style.css'
-import ButtonForm from '../components/ButtonForm';
+
 
 const Register = () => {
   // Estado para mostrar/ocultar la alerta
@@ -21,6 +21,7 @@ const Register = () => {
       password: password.current.value,
       photo: photo.current.value
     }
+    console.log(data)
 
     // Lógica de registro aquí...
     axios
@@ -47,9 +48,7 @@ const Register = () => {
           <p>Discord manga and comics,track your progres,
             have fun,read manga.
           </p>
-          \\\
-
-          {show && <Alert message="Este es un mensaje de alerta" />}
+          <Alert handleRegisterSubmit={handleRegisterSubmit} />
           <form className='bg-blue-200 h-5/6' onSubmit={(e) => handleRegisterSubmit(e)}>
 
             <div className="form-group">
@@ -72,15 +71,6 @@ const Register = () => {
               </label>
             </div>
 
-
-
-            <ButtonForm
-              funcion={handleRegisterSubmit}
-              title="Sign up!"
-              url="http://localhost:8000/register"
-              show={show}
-              setShow={setShow}
-            />
           </form>
         </div>
         <div className='w-full md:w-1/2 md:m-5 min-h-screen bg-no-repeat bg-cover flex flex-col justify-start' style={{ backgroundImage: "url('/public/image/imagen-registro.svg')" }}>
@@ -93,9 +83,3 @@ const Register = () => {
   );
 }
 export default Register;
-
-
-
-
-
-

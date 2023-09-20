@@ -13,7 +13,8 @@ import Page from '../Pages/Page'
 import Register from '../Pages/Register'
 import NewRole from '../Pages/NewRole'
 import Login from '../components/login'
-
+import MangaForm from '../Pages/MangaForm'
+import ChapterForm from "../Pages/ChapterForm"
 
 const Router = createBrowserRouter([
 
@@ -28,18 +29,14 @@ const Router = createBrowserRouter([
             },
             {
                 path: '/Register',
-                element: <Register />
+                element: <Register/>
             },
             {
                 path: '/author-form',
                 element: <AuthorForm />
             },
             {
-                path: '/author',
-                element: <AuthorForm />
-            },
-            {
-                path: 'authors/me',
+                path: '/authors/me',
                 element: <Author />
             },
             {
@@ -61,6 +58,12 @@ const Router = createBrowserRouter([
             },
 
             {
+                path: '/manga-form',
+                element: <MangaForm/>
+
+            },
+
+            {
                 path: '/manga/:id',
                 element: <MangaDetail />
             },
@@ -70,17 +73,40 @@ const Router = createBrowserRouter([
             },
 
             {
-                path: '/chapter/:id/:page',
-                element: <Page />
+                path: '/manga-form',
+                element: <MangaForm/>
+
             },
+
             {
-                path: '/NotAllow',
-                element: <NotAllow />
+                path: '/chapter',
+                element: <ChapterListTab />
+            },
+
+            {
+                path: '/manga/:id',
+                element: <MangaDetail/>
+            },
+            
+            {
+                path: '/manga/:id/chapter-form',
+                element: <ChapterForm/>
+            },
+
+            {
+                path: '/chapter',
+                element: <ChapterListTab/>
+            },
+
+
+             {
+                path: '/chapter/:id/:page',
+                element: <Page/>
             },
             {
                 path: '/login',
                 element: <Login />
-            }
+            }         
         ]
     }
 
