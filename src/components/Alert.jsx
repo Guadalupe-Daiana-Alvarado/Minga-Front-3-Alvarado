@@ -1,32 +1,27 @@
 /* eslint-disable react/prop-types */
 const Alert = ({ show, setShow, message, data }) => {
   return (
-    <div className='flex h-screen justify-center items-center absolute'>
+    <div className='flex p-3 justify-center items-center absolute'>
       <div className='min-h-32 w-64 bg-white flex flex-col items-center justify-center rounded-lg'>
-        {(message && message.length > 0) ? (
+        {Array.isArray(message) && message.length > 0 ? (
           message.map((errorMessage, index) => (
-            <>
             <div key={index}>
-                <h1
-                  className='min-h-2/3 w-full text-center border-b-2 rounded-t-lg'
-                >
-                  {errorMessage}
-                </h1>
-                </div>
-              
-            </>
+              <h1
+                className='min-h-2/3 w-full text-center border-b-2 rounded-t-lg'
+              >
+                {errorMessage}
+              </h1>
+            </div>
           ))
         ) : (
           data && data.message ? (
-          
             <h1 className='min-h-2/3 w-full text-center border-b-2 rounded-t-lg'>
               {data.message}
             </h1>
-           
           ) : null
         )}
-        <button onClick={() => setShow(!show)} className='h-1/3 w-full rounded-b-lg text-blue-500'>
-          Accept
+        <button onClick={() => setShow(!show)} className='h-1/3 w-5/6 rounded-b-lg text-blue-500'>
+        ¿The data entered for what you are about to create?, ¿OK?
         </button>
       </div>
     </div>
@@ -34,6 +29,7 @@ const Alert = ({ show, setShow, message, data }) => {
 };
 
 export default Alert;
+
 
 
 // import React from 'react';

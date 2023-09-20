@@ -203,9 +203,13 @@ const AuthorForm = () => {
                 setShow={setShow}
               />
             </li>
+            <li>
+            {alertType === "error" && <Alert message={message} data={data} setShow={setShow} />}
+
+            </li>
           </ul>
         </form>
-         {show && <Alert message={alertMessage} type={alertType} />} 
+        {/*show && <Alert message={alertMessage} type={alertType} />*/} 
       </div>
     </main>
   );
