@@ -8,17 +8,6 @@ const Display = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [userRole, setUserRole] = useState(0);
   const navigate = useNavigate();
-
-  const navigationOptions = [
-    <ButtonNav to="/" title="Home" />,
-    <ButtonNav to={isLoggedIn ? "/Mangas" : "/NotAllow"} title="Mangas" />,
-    <ButtonNav to="/login" title="Login" />,
-    <ButtonNav to="/authors/me" title="Profile" />,
-    <ButtonNav to="/newRole" title="NewRole" />,
-    /* Si el usuario NO está autenticado, muestra el botón "Register" que dirige a /register */
-    !isAuthenticated && <ButtonNav to="/register" title="Register" />,
-  ];
-
   const toggleIsLoggedIn = () => {
     if (isLoggedIn) {
       // Eliminar token y datos de usuario del localStorage
@@ -33,6 +22,17 @@ const Display = () => {
     }
     setIsLoggedIn(!isLoggedIn); // Cambiar el estado isLoggedIn
   };
+  const navigationOptions = [
+    <ButtonNav to="/" title="Home" />,
+    <ButtonNav to={isLoggedIn ? "/Mangas" : "/NotAllow"} title="Mangas" />,
+    <ButtonNav onClick={toggleIsLoggedIn} to="/login" title="Login" />,
+    <ButtonNav to="/authors/me" title="Profile" />,
+    <ButtonNav to="/newRole" title="NewRole" />,
+    /* Si el usuario NO está autenticado, muestra el botón "Register" que dirige a /register */
+    !isAuthenticated && <ButtonNav to="/register" title="Register" />,
+  ];
+
+  
 
   return (
     <nav className='bg-gradient-to-r from-pink-300 to-pink-500 h-1/2 flex flex-col justify-around items-center text-center mt-5'>
@@ -45,12 +45,6 @@ const Display = () => {
         )
       ))}
       
-      <button
-        className='text-pink-400 bg-white p-1 w-48 rounded-md font-semibold text-2xl'
-        onClick={toggleIsLoggedIn}
-      >
-        {isLoggedIn ? 'Cerrar Sesión' : 'Iniciar Sesión'}
-      </button>
     </nav>
   );
 };
