@@ -15,6 +15,7 @@ const Display = () => {
     <ButtonNav to="/login" title="Login" />,
     <ButtonNav to="/authors/me" title="Profile" />,
     <ButtonNav to="/newRole" title="NewRole" />,
+    <ButtonNav to="/manga-form" title="NewMangas"/>,
     /* Si el usuario NO está autenticado, muestra el botón "Register" que dirige a /register */
     !isAuthenticated && <ButtonNav to="/register" title="Register" />,
   ];
