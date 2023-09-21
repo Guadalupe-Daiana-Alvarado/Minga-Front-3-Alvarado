@@ -15,6 +15,7 @@ import NewRole from '../Pages/NewRole'
 import Login from '../components/login'
 import MangaForm from '../Pages/MangaForm'
 import ChapterForm from "../Pages/ChapterForm"
+import Comments from '../Pages/Comments'
 
 const Router = createBrowserRouter([
 
@@ -99,13 +100,18 @@ const Router = createBrowserRouter([
             },
 
 
-             {
+            {
                 path: '/chapter/:id/:page',
                 element: <Page/>
             },
             {
                 path: '/login',
                 element: <Login />
+            },
+            
+            {
+                path: '/comment/:id',
+                element: <Comments/>
             }         
         ]
     }

@@ -37,7 +37,9 @@ const Content = (props) => {
                   <div className='flex flex-col ml-2 gap-2'>
                     <Link to={`/chapter/${chapter?._id}/1`}>{chapter?.title}</Link>
                     <div className='flex'>
+                      <Link to={`/comment/${chapter?._id}`}>
                       <img src='../public/image/icon_comment.png' alt='icon_comment' />
+                      </Link>
                       <p>N° XX</p>
                     </div>
                   </div>
