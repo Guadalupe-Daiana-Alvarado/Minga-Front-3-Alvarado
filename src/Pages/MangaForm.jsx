@@ -2,12 +2,18 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ButtonForm from '../components/ButtonForm';
 import Alert from '../components/Alert';
+import { useDispatch, useSelector } from 'react-redux';
+import setManga from '../../redux/actions/manga.js';
+
 
 const MangaForm = () => {
   const [show, setShow] = useState(false);
   const [alertType, setAlertType] = useState(null);
-  const [alertMessage, setAlertMessage] = useState('');
+  const [message, setAlertMessage] = useState('');
   const [categories, setCategories] = useState([]);
+  const dispatchMangaForm = useDispatch();
+  const newMangasForm = useSelector((store) => store.mangasNew.manga)
+  
   const [formData, setFormData] = useState({
     title: '',
     cover_photo: '',
@@ -16,7 +22,6 @@ const MangaForm = () => {
   });
 
   useEffect(() => {
-    // Obtener las categorías existentes al cargar el componente
     axios.get('http://localhost:8000/categories')
       .then((response) => {
         setCategories(response.data);
@@ -39,28 +44,28 @@ const MangaForm = () => {
     const authToken = localStorage.getItem("token");
 
     if (!authToken) {
-      // Si el token no está disponible, puedes redirigir al usuario a una página de inicio de sesión o mostrar un mensaje de error.
       console.error("Token de autorización no encontrado");
       return;
     }
 
     try {
-      // Configurar el encabezado de autorización
       const config = {
         headers: {
           'Authorization': `Bearer ${authToken}`,
         },
       };
 
-      // Realizar la solicitud POST para crear un nuevo manga
+      
+      
       const { data } = await axios.post('http://localhost:8000/mangas', formData, config);
-
-      // Mostrar alerta de éxito
+      dispatchMangaForm(setManga({manga:data.manga}))
+      console.log(dispatchMangaForm)
+     
       setAlertType('success');
       setAlertMessage('Manga creado exitosamente');
       setShow(true);
     } catch (error) {
-      // Mostrar alerta de error
+      
       setAlertType('error');
       setAlertMessage('Error al crear el manga');
       setShow(true);
@@ -69,7 +74,7 @@ const MangaForm = () => {
 
   return (
     <main className="w-full h-3/4 bg-no-repeat bg-cover flex flex-col justify-around" style={{ backgroundImage: "url('./image/backgroundMain.png')" }}>
-      {/* Renderiza el formulario para crear un nuevo manga */}
+      {}
       <div className="bg-neutral-100 w-full min-h-full flex flex-col items-center">
         <form className="w-11/12 min-h-3/4 flex flex-col items-center" id="manga-form">
           <ul>
@@ -150,7 +155,7 @@ const MangaForm = () => {
             </li>
           </ul>
         </form>
-        {show && <Alert message={alertMessage} type={alertType} />}
+        {show && <Alert  show={show} message={message} type={alertType} setShow={setShow} />}
       </div>
     </main>
   );
