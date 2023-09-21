@@ -1,5 +1,6 @@
+import ButtonForm from '../components/ButtonForm';
 /* eslint-disable react/prop-types */
-const Alert = ({ show, setShow, message, data }) => {
+const Alert = ({ show, setShow, message, data,handleRegisterSubmit }) => {
   return (
     <div className='flex h-screen justify-center items-center absolute'>
       <div className='min-h-32 w-64 bg-white flex flex-col items-center justify-center rounded-lg'>
@@ -25,9 +26,13 @@ const Alert = ({ show, setShow, message, data }) => {
            
           ) : null
         )}
-        <button onClick={() => setShow(!show)} className='h-1/3 w-full rounded-b-lg text-blue-500'>
-          Accept
-        </button>
+    <ButtonForm
+              funcion={handleRegisterSubmit}
+              title="Sign up!"
+              url="http://localhost:8000/register"
+              show={show}
+              setShow={setShow}
+            />
       </div>
     </div>
   );
