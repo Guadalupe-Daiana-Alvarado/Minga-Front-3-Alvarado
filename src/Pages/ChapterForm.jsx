@@ -3,7 +3,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import Alert from '../components/Alert'; // Asegúrate de importar el componente Alert desde la ubicación correcta.
 
-
 function ChapterForm() {
   const [show, setShow] = useState(false);
   const [message, setMessage] = useState([]);
@@ -17,39 +16,24 @@ function ChapterForm() {
     const inputTitle = title.current.value;
     const inputPages = pages.current.value;
     const inputOrder = order.current.value;
-
-   
-   
+    const newChapterData = {
+      manga_id: "64f3aa96d9cc8ec6d82d73e9",
+      title: inputTitle,
+      order: inputOrder,
+      pages: inputPages.split(","),
+    };
     try {
-    
-      const miStorage = localStorage.getItem("token"); 
-        const authToken = 'Bearer ' + miStorage; 
-
-        const config = {
-          headers: {
-            'Authorization': authToken,
-          },
-        };
       const { data } = await axios.post(
-        `http://localhost:8000/chapters?manga_id=${manga_id}`,
+        "http://localhost:8000/chapters/",
         newChapterData,
         {
-          config
+          headers: {
+            Authorization:
+              "Bearer " +
+              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NGYzYTg0YWMwMGU4OWQ0MTI3NWM5M2QiLCJlbWFpbCI6ImlnbmFAbWguY29tLmFyIiwiaWF0IjoxNjk1MzU3MjU1LCJleHAiOjE2OTU0NDM2NTV9.dWsBd1JDPYQQoLQG9-wuUT7OMILyp_42qjs8q045HS4",
+          },
         }
       );
-
-
-      const chaptersRes = await axios.get( `http://localhost:8000/chapters?manga_id=${manga_id}`)
-      console.log(chaptersRes)
-
-      const newChapterData  = {
-        manga_id: chaptersRes,
-        title: inputTitle,
-        order: inputOrder,
-        pages: inputPages.split(","),
-      };
-
-
       setMessage([]); // Limpiar mensajes de error en caso de éxito
       setDataResponse(data); // Almacenar la respuesta en el nuevo estado
     } catch (error) {
@@ -103,8 +87,6 @@ function ChapterForm() {
     </div>
   );
 }
-
-export default ChapterForm;
 
 // import React, { useState, useEffect, useRef } from 'react';
 // import Alert from '../components/Alert';
@@ -171,6 +153,6 @@ export default ChapterForm;
 //   );
 // }
 
-// export default ChapterForm;
+export default ChapterForm;
 
 

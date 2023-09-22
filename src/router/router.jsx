@@ -110,8 +110,8 @@ const Router = createBrowserRouter([
             },
             
             {
-                path: '/comment/:id',
-                element: <Comments/>
+                path: '/comment ',
+                element: <Comment/>
             }         
         ]
     }

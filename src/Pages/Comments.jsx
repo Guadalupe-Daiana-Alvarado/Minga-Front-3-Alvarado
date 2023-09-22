@@ -1,5 +1,5 @@
 import React from 'react'
-import Comment from '../components/Comment.jsx'
+import Comment from '../components/CommentModel.jsx'
 
 const Comments = () => {
   return (

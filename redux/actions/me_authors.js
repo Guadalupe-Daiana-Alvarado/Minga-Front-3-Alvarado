@@ -2,9 +2,9 @@ import { createAction } from "@reduxjs/toolkit";
 
 const authorData = createAction ("getAuthordata", ({info}) => {
   return {
-    payload:{
+    payload:
       info
-    }
+    
   }
 })
 
