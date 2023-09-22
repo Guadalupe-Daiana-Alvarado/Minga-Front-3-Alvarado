@@ -15,6 +15,7 @@ import NewRole from '../Pages/NewRole'
 import Login from '../components/login'
 import MangaForm from '../Pages/MangaForm'
 import ChapterForm from "../Pages/ChapterForm"
+import EditChapter from '../Pages/EditChapter'
 
 const Router = createBrowserRouter([
 
@@ -28,9 +29,25 @@ const Router = createBrowserRouter([
                 element: <Index />
             },
             {
+                path: '/notAllow',
+                element: <NotAllow />
+            },
+            {
                 path: '/Register',
                 element: <Register/>
             },
+            {
+                path: '/login',
+                element: <Login />
+            },
+            {
+                path: '/signIn',
+                element: <SignIn />
+            },            
+            {
+                path: '/chapter/:id/:page',
+                element: <Page/>
+            },            
             {
                 path: '/author-form',
                 element: <AuthorForm />
@@ -44,11 +61,6 @@ const Router = createBrowserRouter([
                 element: <NewRole />
             },
             {
-                path: '/signIn',
-                element: <SignIn />
-            },
-
-            {
                 path: '/mangas',
                 element: <Mangas />
             },
@@ -56,13 +68,10 @@ const Router = createBrowserRouter([
                 path: '/mangas/:page',
                 element: <Mangas />
             },
-
             {
                 path: '/manga-form',
                 element: <MangaForm/>
-
             },
-
             {
                 path: '/manga/:id',
                 element: <MangaDetail />
@@ -70,43 +79,15 @@ const Router = createBrowserRouter([
             {
                 path: '/chapter',
                 element: <ChapterListTab />
-            },
-
-            {
-                path: '/manga-form',
-                element: <MangaForm/>
-
-            },
-
-            {
-                path: '/chapter',
-                element: <ChapterListTab />
-            },
-
-            {
-                path: '/manga/:id',
-                element: <MangaDetail/>
-            },
-            
+            },          
             {
                 path: '/manga/:id/chapter-form',
                 element: <ChapterForm/>
-            },
-
+            },     
             {
-                path: '/chapter',
-                element: <ChapterListTab/>
-            },
-
-
-             {
-                path: '/chapter/:id/:page',
-                element: <Page/>
-            },
-            {
-                path: '/login',
-                element: <Login />
-            }         
+                path: '/edit/:manga_id',
+                element: <EditChapter/>
+            },     
         ]
     }
 

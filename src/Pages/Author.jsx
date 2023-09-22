@@ -16,7 +16,7 @@ const Author = () => {
   function getDataAuthor() {
     axios("http://localhost:8000/authors/me")
       .then((res) => {
-        dispatchAuthors(authorData({ info: res.data.author }));
+        dispatchAuthors(authorData({ info: res.data.author}));
         console.log(res.data.author);
       })
       .catch((error) => console.log(error));

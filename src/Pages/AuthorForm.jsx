@@ -204,7 +204,7 @@ const AuthorForm = () => {
               />
             </li>
             <li>
-            {alertType === "error" && <Alert message={message} data={data} setShow={setShow} />}
+            {alertType === "error" && <Alert handleRegisterSubmit={handleSubmit} />}
 
             </li>
           </ul>
