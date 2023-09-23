@@ -6,7 +6,7 @@ const Content = (props) => {
   const { manga, chapters, hasPrevPage, hasNextPage, showChapters, onPageChange } = props;
   const [currentPage, setCurrentPage] = useState(1);
   const [open, setOpen] = useState(false);
-    const [chapterTitle, setChapterTitle] = useState('')
+  const [chapterTitle, setChapterTitle] = useState('')
   const [chapterId, setChapterId] = useState('')
 
   // Función para manejar el botón "Página Anterior" de los capítulos

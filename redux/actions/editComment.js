@@ -4,7 +4,7 @@ import axios from "axios";
 const editComment = createAsyncThunk('editComment', async (info, { rejectWithValue }) => {
     try {
         console.log(info)
-        const res = await axios.put(`http://localhost:8080/comments/${info.comment_id}`, 
+        const res = await axios.put(`http://localhost:8000/comments/${info.comment_id}`, 
         {
             text: info.text
         }, {

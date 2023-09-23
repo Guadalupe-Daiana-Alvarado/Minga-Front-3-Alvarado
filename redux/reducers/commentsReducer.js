@@ -66,7 +66,7 @@ const commentReducer = (state = initialState, action) => {
         case deleteAction.fulfilled.type:
             return {
                 ...state,
-                comments: state.comments.filter((comment) => comment._id != action.payload.comments._id),
+                comments: state.comments.filter((comment) => comment._id !== action.payload.comments._id),
                 error: null
             };
         case deleteAction.rejected.type:
