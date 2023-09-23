@@ -1,10 +1,13 @@
-// actions/manga.js
+import { createAction } from "@reduxjs/toolkit";
 
-// Definir el tipo de acción
-export const SET_MANGA = 'SET_MANGA';
 
-// Crear la acción para despachar los datos del manga
-export const setManga = (mangaData) => ({
-  type: SET_MANGA,
-  payload: mangaData,
-});
+
+const setManga = createAction("newManga", ({manga}) => {
+  return {
+      payload: {
+          manga
+      },
+  }
+})
+
+export default setManga
