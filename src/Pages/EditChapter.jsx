@@ -1,18 +1,27 @@
+import Swal from 'sweetalert2'; // Importa SweetAlert2
 import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
-import Swal from 'sweetalert2'; // Importa SweetAlert2
+import editChapterAccion from '../../redux/actions/editChapterAccion.js';
+import deleteChapterAccion from '../../redux/actions/deleteChapterAccion.js';
 
 const EditChapter = () => {
+
   const user = localStorage.getItem('user');
   const miStorage = localStorage.getItem('token'); // Recupera el token de localStorage
-  const authToken = 'Bearer ' + miStorage; // Utiliza el token recuperado
+  const token = 'Bearer ' + miStorage; // Utiliza el token recuperado
+  console.log(token)
 
   const dispatch = useDispatch();
+
   const [array, setArray] = useState([]);
   const [title, setTitle] = useState('');
   const [photo, setPhoto] = useState('../images/dbf359808a7c4589cdd2c99920e048c7.jpg');
   const [id, setId] = useState(null);
+
+/*   const [editTitle, setEditTitle] = useState('');
+  value={editTitle}
+  onChange={(e) => setEditTitle(e.target.value)} */
 
   const chapterTitle = useRef();
   const chapterField = useRef();
@@ -22,9 +31,10 @@ const EditChapter = () => {
     try {
       const mangaById = await axios.get('http://localhost:8000/chapters/me?manga_id=650d77d9ac832ff3f05d52b2', {
         headers: {
-          Authorization: authToken,
+          Authorization: token,
         },
       });
+      console.log(mangaById)
 
       const mangaChaptersArray = mangaById.data;
 
@@ -40,6 +50,8 @@ const EditChapter = () => {
   };
 
   const editManga = async (e) => {
+    //CREO QUE POR ACA IRIA EL DISPATCH
+
     try {
       e.preventDefault();
 
@@ -47,10 +59,6 @@ const EditChapter = () => {
         console.error('ID de capítulo no encontrado.');
         return;
       }
-
-      const selectedField = chapterField.current.value;
-      const editedValue = chapterEditInfo.current.value;
-
       // Muestra una alerta de confirmación antes de la edición
       const confirmEdit = await Swal.fire({
         title: '¿Estás seguro de editar este capítulo?',
@@ -64,43 +72,49 @@ const EditChapter = () => {
         return; // Si el usuario cancela, no realizar la edición
       }
 
+
+      const selectedField = chapterField.current.value;
+      const editedValue = chapterEditInfo.current.value;
       let data = {
         [selectedField]: editedValue,
       };
-
-      const response = await axios.put(`http://localhost:8000/chapters/${id}?manga_id=650d77d9ac832ff3f05d52b2`, data, {
-        headers: {
-          Authorization: authToken,
-        },
-      });
-
-      if (response) {
-        console.log('Capítulo actualizado exitosamente.');
-        // Llamar a getManga para actualizar la lista de capítulos
-        getManga();
-      } else {
-        console.error('Error al actualizar el capítulo:', response.data.message);
+      //dispatch(editChapterAccion(data))  //////////////////////////////////////////////////////////////
+      // Actualiza el capítulo seleccionado en la base de datos a través de Redux
+      try {
+        await dispatch(editChapterAccion({ id, info: data, token }));
+        Swal.fire({
+          icon: 'success',
+          title: '¡Edición exitosa!',
+          text: 'El capítulo se ha editado correctamente.',
+        });
+      } catch (error) {
+        console.error("Error al editar el capítulo:", error);
+        // Maneja el error, por ejemplo, muestra un mensaje de error al usuario
+        return;
       }
+      /*       const response = await axios.put(`http://localhost:8000/chapters/${id}?manga_id=650d77d9ac832ff3f05d52b2`, data, {
+              headers: {
+                Authorization: authToken,
+              },
+            });
+      
+            if (response) {
+              console.log('Capítulo actualizado exitosamente.');
+      
+           
+            } else {
+              console.error('Error al actualizar el capítulo:', response.data.message);
+            }     */
+
+      // Llamar a getManga para actualizar la lista de capítulos
+      getManga();
     } catch (error) {
       console.error('Error en la solicitud PUT:', error);
     }
   };
 
-  const handleTitle = async (event) => {
-    let titleValue = event.target.value;
-    setTitle(titleValue);
-
-    const selectedChapter = array.find((chapter) => chapter.title === titleValue);
-    if (selectedChapter) {
-      setPhoto(selectedChapter.cover_photo);
-      setId(selectedChapter._id);
-    } else {
-      setPhoto('');
-      setId(null);
-    }
-  };
-
   const deleteManga = async (e) => {
+    //CREO QUE POR ACA IRIA EL DISPATCH
     try {
       e.preventDefault();
 
@@ -123,24 +137,58 @@ const EditChapter = () => {
         return; // Si el usuario cancela, no realizar la eliminación
       }
 
-      // Realiza la solicitud DELETE al servidor para eliminar el capítulo de la base de datos
-      const response = await axios.delete(`http://localhost:8000/chapters/${id}?manga_id=650d77d9ac832ff3f05d52b2`, {
-        headers: {
-          Authorization: authToken,
-        },
-      });
+      /*       // Realiza la solicitud DELETE al servidor para eliminar el capítulo de la base de datos
+            const response = await axios.delete(`http://localhost:8000/chapters/${id}?manga_id=650d77d9ac832ff3f05d52b2`, {
+              headers: {
+                Authorization: authToken,
+              },
+            });
+      
+            // Verifica la respuesta del servidor para manejar errores o confirmación de éxito
+            if (response.status === 200) {
+              console.log('Capítulo eliminado de la base de datos.');
+              // Actualiza la interfaz de usuario eliminando el capítulo de la lista
+              const updatedArray = array.filter((chapter) => chapter.title !== title);
+              setArray(updatedArray);
+            } else {
+              console.error('Error al eliminar el capítulo de la base de datos.');
+            } */
 
-      // Verifica la respuesta del servidor para manejar errores o confirmación de éxito
-      if (response.status === 200) {
-        console.log('Capítulo eliminado de la base de datos.');
-        // Actualiza la interfaz de usuario eliminando el capítulo de la lista
-        const updatedArray = array.filter((chapter) => chapter.title !== title);
-        setArray(updatedArray);
-      } else {
-        console.error('Error al eliminar el capítulo de la base de datos.');
+
+      // Llama a la acción para eliminar el capítulo usando Redux
+      try {
+        await dispatch(deleteChapterAccion({ id, token }));
+        Swal.fire({
+          icon: 'success',
+          title: '¡Eliminación exitosa!',
+          text: 'El capítulo se ha eliminado correctamente.',
+        });
+      } catch (error) {
+        console.error("Error al eliminar el capítulo:", error);
+        // Maneja el error, por ejemplo, muestra un mensaje de error al usuario
+        return;
       }
+
+      // Recarga los datos del manga después de la eliminación
+      getManga();
+
     } catch (error) {
       console.error(error);
+    }
+  };
+
+  const handleTitle = async (event) => {
+    //CREO QUE POR ACA IRIA EL DISPATCH
+    let titleValue = event.target.value;
+    setTitle(titleValue);
+
+    const selectedChapter = array.find((chapter) => chapter.title === titleValue);
+    if (selectedChapter) {
+      setPhoto(selectedChapter.cover_photo);
+      setId(selectedChapter._id);
+    } else {
+      setPhoto('');
+      setId(null);
     }
   };
 
@@ -157,13 +205,16 @@ const EditChapter = () => {
         <h1 className="border-b-2 border-neutral-400 bg-slate-100 text-center text-xs pt-5 w-full md:w-1/2">
           Alice in Borderland
         </h1>
-        <select onChange={handleTitle} ref={chapterTitle} className="border-b-2 border-neutral-400 bg-slate-100 text-xs pt-5 w-full md:w-1/2">
+        <select 
+        onChange={handleTitle} 
+        ref={chapterTitle} 
+        className="border-b-2 border-neutral-400 bg-slate-100 text-xs pt-5 w-full md:w-1/2">
           {array
             ? array.map((chapter) => (
-                <option key={chapter._id} value={chapter.title}>
-                  {chapter.title}
-                </option>
-              ))
+              <option key={chapter._id} value={chapter.title}>
+                {chapter.title}
+              </option>
+            ))
             : <option>Option 1</option>}
         </select>
         <select ref={chapterField} className="border-b-2 border-neutral-400 bg-slate-100 text-xs pt-5 w-full md:w-1/2">
@@ -173,6 +224,7 @@ const EditChapter = () => {
         </select>
         <input
           ref={chapterEditInfo}
+          //value={editedValue}
           type="text"
           className="border-b-2 border-neutral-400 bg-slate-100 text-xs pt-5 w-full md:w-1/2"
           placeholder="data to edit"
@@ -201,24 +253,27 @@ import axios from 'axios';
 import NavBar from '../layouts/NavBar';
 import Index from './Index';
 import Swal from 'sweetalert2';
-import editChapter from '../redux/actions/editChapter.js';
-import deleteChapter from "../redux/actions/deleteChapter" 
+import editChapterAction from '../redux/actions/editChapter.js';
+import deleteChapterAction from '../redux/actions/deleteChapter.js';
 
 const EditChapter = () => {
-  const dispatch = useDispatch();
   const { user, token } = useSelector((store) => store.me_authorsReducer);
-  const chapters = useSelector((store) => store.chapterReducer.chapters);
-  const [selectedChapter, setSelectedChapter] = useState(null);
+
+  const [chapter, setChapter] = useState([]);
+  const [title, setTitle] = useState('');
+  const [photo, setPhoto] = useState('');
+  const [id, setId] = useState(null);
   const [editTitle, setEditTitle] = useState('');
 
   const chapterTitle = useRef();
   const chapterField = useRef();
   const chapterEditInfo = useRef();
+  const dispatch = useDispatch();
 
   const getManga = async () => {
     try {
       let mangaById = await axios.get(
-        'http://localhost:8000/chapters/me?manga_id=650d77d9ac832ff3f05d52b2',
+        'http://localhost:8080/chapters/me?manga_id=650b543262dd9dcc4488d8f0',
         {
           headers: {
             Authorization: 'Bearer ' + token,
@@ -226,9 +281,8 @@ const EditChapter = () => {
         }
       );
       let mangaChaptersArray = mangaById.data;
-      // Actualiza el estado global con los capítulos
-      // (Puedes almacenar los capítulos en el estado global al cargar la página)
-      // dispatch(setChaptersAction(mangaChaptersArray));
+      
+      setChapter(mangaChaptersArray);
     } catch (error) {
       console.error(error);
     }
@@ -257,11 +311,22 @@ const EditChapter = () => {
             : chapterEditInfo.current.value,
       };
 
-      // Llama a la acción de edición
-      dispatch(editChapter(selectedChapter.id, updatedChapter));
+      // Actualiza el capítulo seleccionado en la base de datos a través de Redux
+      try {
+        await dispatch(editChapterAction({ id, info: updatedChapter, token }));
+        Swal.fire({
+          icon: 'success',
+          title: '¡Edición exitosa!',
+          text: 'El capítulo se ha editado correctamente.',
+        });
+      } catch (error) {
+        console.error("Error al editar el capítulo:", error);
+        // Maneja el error, por ejemplo, muestra un mensaje de error al usuario
+        return;
+      }
 
-      // Actualiza el estado local del capítulo editado
-      setSelectedChapter({ ...selectedChapter, ...updatedChapter });
+      // Recarga los datos del manga después de la edición
+      getManga();
     } catch (error) {
       console.error(error);
     }
@@ -283,23 +348,38 @@ const EditChapter = () => {
         return;
       }
 
-      // Llama a la acción de eliminación
-      dispatch(deleteChapter(selectedChapter.id));
+      // Llama a la acción para eliminar el capítulo usando Redux
+      try {
+        await dispatch(deleteChapterAction({ id, token }));
+        Swal.fire({
+          icon: 'success',
+          title: '¡Eliminación exitosa!',
+          text: 'El capítulo se ha eliminado correctamente.',
+        });
+      } catch (error) {
+        console.error("Error al eliminar el capítulo:", error);
+        // Maneja el error, por ejemplo, muestra un mensaje de error al usuario
+        return;
+      }
+
+      // Recarga los datos del manga después de la eliminación
+      getManga();
     } catch (error) {
       console.error(error);
     }
   };
 
-  const handleTitleChange = (event) => {
+  const handleTitle = (event) => {
     const titleValue = event.target.value;
-    const selected = chapters.find((chapter) => chapter.title === titleValue);
-    
-    setSelectedChapter(selected); // Actualiza el estado local del capítulo seleccionado
+    setTitle(titleValue);
 
-    if (selected) {
-      setEditTitle(selected[chapterField.current.value] || '');
+    const selectedChapter = chapter.find((ch) => ch.title === titleValue);
+    if (selectedChapter) {
+      setPhoto(selectedChapter.cover_photo);
+      setId(selectedChapter._id);
     } else {
-      setEditTitle('');
+      setPhoto('');
+      setId(null);
     }
   };
 
@@ -320,14 +400,14 @@ const EditChapter = () => {
               Alice in Borderland
             </h1>
             <select
-              onChange={handleTitleChange}
+              onChange={handleTitle}
               ref={chapterTitle}
               className="border-b-2 border-neutral-400 bg-slate-100 text-xs pt-5 w-full md:w-1/2"
             >
-              {chapters
-                ? chapters.map((chapter) => (
-                    <option value={chapter.title} key={chapter.id}>
-                      {chapter.title}
+              {chapter
+                ? chapter.map((ch) => (
+                    <option value={ch.title} key={ch._id}>
+                      {ch.title}
                     </option>
                   ))
                 : <option>Option 1</option>}
@@ -367,8 +447,8 @@ const EditChapter = () => {
             </button>
           </form>
           <div className="text-center max-md: hidden md:h-2/3 md:flex md:flex-col md:items-center md:w-1/2 md:me-10">
-            <h1>Chapter: {selectedChapter?.title || ''}</h1>
-            <img className="h-96 w-52" src={selectedChapter?.cover_photo || ''} alt="" />
+            <h1>Chapter: {title}</h1>
+            <img className="h-96 w-52" src={photo} alt="" />
           </div>
         </div>
       ) : (
@@ -379,63 +459,3 @@ const EditChapter = () => {
 };
 
 export default EditChapter; */
-
-
-
-/* import React from 'react'
-import { useSelector } from 'react-redux'
-import Index from './Index'
-
-
-const EditChapter = () => {
-    const user = useSelector((store)=>store.profile.user)
-    console.log(user)
-    return (<>
-        {user.role === 1 || user.role === 2? (<div className='h-screen bg-slate-100 flex flex-col justify-center pt-12 items-center md:flex-row'>
-            <form action="" className='flex flex-col h-2/3 w-2/3 items-center'>
-                <label htmlFor="" className='text-2xl pb-5'>Edit Chapter</label>
-                <h1 className='border-b-2 border-neutral-400 bg-slate-100 text-center text-xs pt-5 w-full md:w-1/2'>Title of the manga</h1>
-                <select className='border-b-2 border-neutral-400 bg-slate-100 text-xs pt-5 w-full md:w-1/2'>
-
-                    <option>Option 1 </option>  {/*Aca probablemente haya que hacer un mapeo dinamico de los caps
-
-                    <option>Option 2 </option>
-
-                    <option>Option 3 </option>
-
-                </select>
-                <select className='border-b-2 border-neutral-400 bg-slate-100 text-xs pt-5 w-full md:w-1/2'>
-
-                    <option>Title</option>
-
-                    <option>Cover photo</option>
-
-                    <option>Pages</option>
-
-                    <option>Order</option>
-
-                </select>
-                <input type="text" className='border-b-2 border-neutral-400 bg-slate-100 text-xs pt-5 w-full md:w-1/2' placeholder='  data to edit' />
-                <button onClick={(e) => {
-                    e.preventDefault();
-                    handleForm();
-                }}
-                    className='bg-emerald-400 text-white font-semibold py-3 px-5 mt-10 rounded-full w-full md:w-1/2'>Edit</button>
-                <button onClick={(e) => {
-                    e.preventDefault();
-                    handleForm();
-                }}
-                    className='text-rose-400 bg-red-100 font-semibold py-3 px-5 mt-5 rounded-full w-full md:w-1/2'>Delete</button>
-            </form>
-            <div className='text-center max-md: hidden md:h-2/3 md:flex md:flex-col md:items-center md:w-1/2 md:me-10'>
-                <h1>Chapter X: Titulo del capitulo</h1>
-                <img className='h-96 w-52' src="../images/dbf359808a7c4589cdd2c99920e048c7.jpg" alt="" />
-            </div>
-            {{show && <Alert show={show} message={message} data={dataResponse} setShow={setShow} />/}
-        </div>) : (<Index/>)}
-        </>)
-}
-
-export default EditChapter*/
-
-/*  */

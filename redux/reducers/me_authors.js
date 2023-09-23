@@ -5,6 +5,7 @@ const initialState = {
   profile: {} 
 }
 // Se actualiza el estado
+
 const me_authors = createReducer(initialState, (builder) =>
   builder
     .addCase(authorData, (state, action) =>{

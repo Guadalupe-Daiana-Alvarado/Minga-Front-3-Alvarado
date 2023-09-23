@@ -1,67 +1,20 @@
-// chapterReducer.js
-import {
-    EDIT_CHAPTER_REQUEST,
-    EDIT_CHAPTER_SUCCESS,
-    EDIT_CHAPTER_FAILURE,
-    DELETE_CHAPTER_REQUEST,
-    DELETE_CHAPTER_SUCCESS,
-    DELETE_CHAPTER_FAILURE,
-  } from '../actions/types';
-
+  import { createReducer } from "@reduxjs/toolkit";
+  import editChapterAccion from "../actions/editChapterAccion.js";
+  
   const initialState = {
-    chapters: [], // Tu array de capítulos
-    loading: false,
-    error: null,
+    chapter: [], // Cambiado el nombre de "chapter" a "chapters" para reflejar que es una lista de capítulos
   };
-
-  const chapterReducer = (state = initialState, action) => {
-    switch (action.type) {
-      case EDIT_CHAPTER_REQUEST:
-      case DELETE_CHAPTER_REQUEST:
-        return {
-          ...state,
-          loading: true,
-        };
-
-      case EDIT_CHAPTER_SUCCESS:
-        const updatedChaptersAfterEdit = state.chapters.map((chapter) => {
-          if (chapter.id === action.payload.id) {
-            return {
-              ...chapter,
-              ...action.payload.updatedChapter,
-            };
-          }
-          return chapter;
-        });
-
-        return {
-          ...state,
-          chapters: updatedChaptersAfterEdit,
-          loading: false,
-        };
-
-      case DELETE_CHAPTER_SUCCESS:
-        const updatedChaptersAfterDelete = state.chapters.filter(
-          (chapter) => chapter.id !== action.payload.id
-        );
-
-        return {
-          ...state,
-          chapters: updatedChaptersAfterDelete,
-          loading: false,
-        };
-
-      case EDIT_CHAPTER_FAILURE:
-      case DELETE_CHAPTER_FAILURE:
-        return {
-          ...state,
-          loading: false,
-          error: 'Error al realizar la operación.',
-        };
-
-      default:
-        return state;
-    }
-  };
-
-  export default chapterReducer;
+  
+  const chapterReduce = createReducer(initialState, (builder) =>
+    builder.addCase(editChapterAccion.fulfilled, (state, action) => {
+      // Utiliza los datos de la acción para actualizar el estado
+      return {
+        ...state,
+        chapter: state.chapter.map((chapter) =>
+          chapter._id === action.payload._id ? action.payload : chapter
+        ),
+      };
+    })
+  );
+  
+  export default chapterReduce;
