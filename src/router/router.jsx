@@ -15,6 +15,8 @@ import NewRole from '../Pages/NewRole'
 import Login from '../components/login'
 import MangaForm from '../Pages/MangaForm'
 import ChapterForm from "../Pages/ChapterForm"
+import MyMangas from '../Pages/MyMangas'
+import EditMangas from '../Pages/EditMangas'
 
 const Router = createBrowserRouter([
 
@@ -29,7 +31,7 @@ const Router = createBrowserRouter([
             },
             {
                 path: '/Register',
-                element: <Register/>
+                element: <Register />
             },
             {
                 path: '/author-form',
@@ -59,8 +61,16 @@ const Router = createBrowserRouter([
 
             {
                 path: '/manga-form',
-                element: <MangaForm/>
+                element: <MangaForm />
 
+            },
+            {
+                path: "/mymangas",
+                element: <MyMangas />
+            },
+            {
+                path: "/edit/manga",
+                element: <EditMangas/>
             },
 
             {
@@ -74,7 +84,7 @@ const Router = createBrowserRouter([
 
             {
                 path: '/manga-form',
-                element: <MangaForm/>
+                element: <MangaForm />
 
             },
 
@@ -85,28 +95,28 @@ const Router = createBrowserRouter([
 
             {
                 path: '/manga/:id',
-                element: <MangaDetail/>
+                element: <MangaDetail />
             },
-            
+
             {
                 path: '/manga/:id/chapter-form',
-                element: <ChapterForm/>
+                element: <ChapterForm />
             },
 
             {
                 path: '/chapter',
-                element: <ChapterListTab/>
+                element: <ChapterListTab />
             },
 
 
-             {
+            {
                 path: '/chapter/:id/:page',
-                element: <Page/>
+                element: <Page />
             },
             {
                 path: '/login',
                 element: <Login />
-            }         
+            }
         ]
     }
 

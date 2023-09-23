@@ -1,6 +1,5 @@
 import React from 'react';
 import { useRef } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import loginImg from '../../public/image/login-img.svg'; // Asegúrate de tener la ruta correcta
@@ -21,7 +20,23 @@ function Login() {
       .catch((err) => {
         console.log(err)
       })
-    /* Despachar la accion de login */
+
+    dispatch(login(data))
+      .then((res) => {
+        const userStatus = (res.payload.user.online)
+        console.log(userStatus)
+
+        if (userStatus === true) {
+          navigate("/")
+        }
+      })
+
+
+      .catch((err) => {
+        console.log(err)
+      })
+
+
   };
 
   return (
