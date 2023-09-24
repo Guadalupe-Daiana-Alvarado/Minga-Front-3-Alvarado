@@ -33,7 +33,7 @@ const Alert = ({ show, setShow, message, data,handleRegisterSubmit }) => {
   );
 };
 
-export default Alert;
+export default Alert; 
 
 
 

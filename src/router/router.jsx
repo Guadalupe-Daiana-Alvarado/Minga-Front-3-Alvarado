@@ -15,6 +15,8 @@ import NewRole from '../Pages/NewRole'
 import Login from '../components/login'
 import MangaForm from '../Pages/MangaForm'
 import ChapterForm from "../Pages/ChapterForm"
+import MyMangas from '../Pages/MyMangas'
+import EditMangas from '../Pages/EditMangas'
 import EditChapter from '../Pages/EditChapter'
 
 const Router = createBrowserRouter([
@@ -34,7 +36,7 @@ const Router = createBrowserRouter([
             },
             {
                 path: '/Register',
-                element: <Register/>
+                element: <Register />
             },
             {
                 path: '/login',
@@ -73,21 +75,53 @@ const Router = createBrowserRouter([
                 element: <MangaForm/>
             },
             {
+                path: "/mymangas",
+                element: <MyMangas />
+            },
+            {
+                path: "/edit/manga",
+                element: <EditMangas/>
+            },
+            {
                 path: '/manga/:id',
                 element: <MangaDetail />
             },
             {
                 path: '/chapter',
                 element: <ChapterListTab />
-            },          
+            },
+            {
+                path: '/manga-form',
+                element: <MangaForm/>
+            },
+            {
+                path: '/chapter',
+                element: <ChapterListTab />
+            },
+            {
+                path: '/manga/:id',
+                element: <MangaDetail/>
+            },
             {
                 path: '/manga/:id/chapter-form',
                 element: <ChapterForm/>
-            },     
+            },
             {
-                path: '/edit/:manga_id',
+                path: '/chapter',
+                element: <ChapterListTab />
+            },
+            {
+                path: "/edit/:manga_id",
                 element: <EditChapter/>
-            },     
+            },
+            {
+                path: '/chapter/:id/:page',
+                element: <Page />
+            },
+            {
+                path: '/login',
+                element: <Login />
+            }
         ]
     }
 

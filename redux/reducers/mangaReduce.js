@@ -1,21 +1,19 @@
-// reducers/
-
-import { SET_MANGA } from '../actions/manga';
+import { createReducer } from '@reduxjs/toolkit';
+import setManga from '../actions/manga';
 
 const initialState = {
-  manga: null, // Inicialmente, no hay datos de manga
+  manga: {} 
 };
 
-const mangaReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case SET_MANGA:
-      return {
-        ...state,
-        manga: action.payload,
-      };
-    default:
-      return state;
+const mangaReducer = createReducer (initialState, (builder) => 
+  builder
+  .addCase(setManga, (state, action) =>{
+    const newState = {
+      ... state,
+      manga: action.payload.manga
   }
-};
+  return newState
+ } )
 
+)
 export default mangaReducer;
