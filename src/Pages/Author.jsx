@@ -10,13 +10,15 @@ const Author = () => {
   const profile = useSelector((store) => store.author_reduce.profile);
   console.log(profile)
   const mangasNews = useSelector((store) => store.mangasNews_reduce.mangas_news);
-  const dispatchAuthors = useDispatch();
-  const dispatchMangasNews = useDispatch();
+  const dispatch = useDispatch();
+  const store = useSelector((store)=>store)
+  console.log(store)
+ 
 
   function getDataAuthor() {
     axios("http://localhost:8000/authors/me")
       .then((res) => {
-        dispatchAuthors(authorData({ info: res.data.author }));
+        dispatch(authorData({ info: res.data.author }));
         console.log(res.data.author);
       })
       .catch((error) => console.log(error));
@@ -26,7 +28,7 @@ const Author = () => {
     axios("http://localhost:8000/mangas?news")
       .then((res) => {
         console.log(res);
-        dispatchMangasNews(mangasData({ info_mangas: res.data.mangas }));
+        dispatch(mangasData({ info_mangas: res.data.mangas }));
       })
       .catch((error) => console.log(error));
   }

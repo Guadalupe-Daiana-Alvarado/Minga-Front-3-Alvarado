@@ -1,31 +1,42 @@
 import React from 'react';
 import { useRef } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
+import { useSelector, useDispatch } from 'react-redux';
 import loginImg from '../../public/image/login-img.svg'; // Asegúrate de tener la ruta correcta
+import { login } from '../../redux/actions/login';
+
 
 function Login() {
   const email = useRef(null);
   const password = useRef(null);
-  const api = 'http://localhost:8000';
+  const dispatch = useDispatch()
   const navigate = useNavigate();
 
   const signin = async (e) => {
     e.preventDefault();
     let data = { email: email.current.value, password: password.current.value };
-    console.log(data);
-    axios
-      .post(api + '/auth/signin', data)
-      .then((res) => {
-        console.log(res);
-        localStorage.setItem('token', res.data.token);
-        let user = JSON.stringify(res.data.user);
-        localStorage.setItem('user', user);
-        alert('Success');
-        navigate('/');
+    dispatch(login(data))
+      .then((res) => console.log(res.payload))
+      .catch((err) => {
+        console.log(err)
       })
-      .catch((err) => console.log(err));
+
+    dispatch(login(data))
+      .then((res) => {
+        const userStatus = (res.payload.user.online)
+        console.log(userStatus)
+
+        if (userStatus === true) {
+          navigate("/")
+        }
+      })
+
+
+      .catch((err) => {
+        console.log(err)
+      })
+
+
   };
 
   return (

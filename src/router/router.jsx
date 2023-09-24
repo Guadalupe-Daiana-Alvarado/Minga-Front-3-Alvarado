@@ -16,6 +16,8 @@ import Login from '../components/login'
 import MangaForm from '../Pages/MangaForm'
 import ChapterForm from "../Pages/ChapterForm"
 import AdminPanel from '../components/AdminPanel'
+import MyMangas from '../Pages/MyMangas'
+import EditMangas from '../Pages/EditMangas'
 
 const Router = createBrowserRouter([
 
@@ -62,6 +64,14 @@ const Router = createBrowserRouter([
                 path: '/manga-form',
                 element: <MangaForm />
 
+            },
+            {
+                path: "/mymangas",
+                element: <MyMangas />
+            },
+            {
+                path: "/edit/manga",
+                element: <EditMangas />
             },
 
             {
