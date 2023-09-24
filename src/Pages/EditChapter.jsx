@@ -4,7 +4,6 @@ import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import editChapterAccion from '../../redux/actions/editChapterAccion.js';
 import deleteChapterAccion from '../../redux/actions/deleteChapterAccion.js';
-import Index from '../Pages/NotAllow.jsx';
 import { useNavigate } from 'react-router-dom';
 
 const EditChapter = () => {
