@@ -6,16 +6,15 @@ import mangasReducer from './reducers/mangasReducer';
 import mangaReduce from './reducers/mangaReduce'
 
 
-
 export const store = configureStore({
     reducer: {
         chapters: chaptersReducer,
         author_reduce: me_authors,
         mangasNews_reduce: mangaNews,
-        mangas : mangasReducer,
-        mangasNew : mangaReduce
+        mangas: mangasReducer,
+        mangasNew: mangaReduce
     }
 
-   
+
 });
 
