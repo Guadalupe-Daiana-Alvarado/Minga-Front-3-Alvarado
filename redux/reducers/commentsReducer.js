@@ -2,6 +2,7 @@ import commentAction from "../actions/commentsAction";
 import createComment from "../actions/createCommentAction";
 import deleteAction from "../actions/deleteAction";
 import editComment from "../actions/editComment";
+import createReplyAction from "../actions/replyComments";
 
 const initialState = {
     comments: [],
@@ -64,16 +65,31 @@ const commentReducer = (state = initialState, action) => {
                 error: null
             };
         case deleteAction.fulfilled.type:
+            console.log("Comentario eliminado con éxito. Nuevo estado de comentarios:", state.comments)
+            console.log(action.payload)
             return {
                 ...state,
-                comments: state.comments.filter((comment) => comment._id !== action.payload.comments._id),
+                comments: state.comments.filter((comment) => comment._id !== action.payload.comment_id),
+                
                 error: null
             };
+            
         case deleteAction.rejected.type:
             return {
                 ...state,
                 error: action.payload.error
             };
+        case createReplyAction.fulfilled.type:
+            return {
+                    ...state,
+                    replies: [action.payload.reply, ...state.replies],
+                    error: null
+                };
+        case createReplyAction.rejected.type:
+            return {
+                    ...state,
+                    error: action.payload.error
+                };
         default:
             return state;
     }

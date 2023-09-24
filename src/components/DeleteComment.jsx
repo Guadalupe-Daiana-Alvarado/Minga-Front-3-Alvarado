@@ -9,6 +9,8 @@ const DeleteComment = ({ delette, setDelette, token }) => {
   const dispatch = useDispatch();
 
   const sendDeleteComment = async () => {
+    console.log("se está ejecutando deletecoment?")
+    console.log("ID del comentario a eliminar:", delette.comment._id)
     const info = {
       comment_id: delette.comment._id,
       token
@@ -21,6 +23,7 @@ const DeleteComment = ({ delette, setDelette, token }) => {
     } catch (error) {
       toast.error('Error deleting comment');
     }
+    
   };
 
   const closeModal = () => {
