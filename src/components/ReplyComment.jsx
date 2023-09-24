@@ -1,25 +1,28 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import  createReplyAction from '../../redux/actions/replyComments'; // Asegúrate de importar la acción correcta
+import { useDispatch } from 'react-redux';
+import createReplyAction from '../../redux/actions/replyComments';
 
-const CreateReply = ({ parentCommentId }) => {
+const CreateReply = ({ parentCommentId, user }) => {
     const [replyText, setReplyText] = useState('');
-    const user = useSelector(state => state.user); // Supongamos que tienes un estado de usuario en Redux
     const dispatch = useDispatch();
 
     const handleCreateReply = async () => {
         try {
-            // Verifica si replyText está vacío
+            
             if (!replyText) {
                 return alert('El campo de respuesta no puede estar vacío');
             }
 
-            // Crea la respuesta
+            if (!user || !user.email) {
+                return alert('El usuario no está correctamente definido');
+            }
+
             const info = {
-                parentCommentId, // ID del comentario padre
-                email: user.email, // Email del usuario actual (ajusta esto según tu estructura de usuario)
+                parentCommentId,
+                email: user.email,
                 text: replyText,
-                token, // Token de autenticación del usuario
+                token: user.token,
+                // Otros datos necesarios para crear la respuesta
             };
 
             // Dispatch de la acción para crear la respuesta
@@ -28,10 +31,10 @@ const CreateReply = ({ parentCommentId }) => {
             // Limpia el campo de respuesta después de enviarlo
             setReplyText('');
 
-            // Puedes manejar el éxito aquí (por ejemplo, mostrar una notificación)
+            // Manejo del éxito (puedes mostrar una notificación u otra lógica aquí)
             alert('Respuesta creada con éxito');
         } catch (error) {
-            // Puedes manejar el error aquí (por ejemplo, mostrar una notificación de error)
+            // Manejo de errores
             console.error('Error al crear la respuesta:', error);
             alert('Error al crear la respuesta. Inténtalo de nuevo más tarde.');
         }

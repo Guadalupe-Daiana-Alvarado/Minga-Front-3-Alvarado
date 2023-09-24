@@ -2,7 +2,7 @@ import React from 'react';
 import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import loginImg from '../../public/image/login-img.svg'; // AsegÃºrate de tener la ruta correcta
+import loginImg from '../../public/image/login-img.svg'; // Asegúrate de tener la ruta correcta
 import { login } from '../../redux/actions/login';
 
 

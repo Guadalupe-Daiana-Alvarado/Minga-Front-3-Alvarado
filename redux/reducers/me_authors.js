@@ -11,6 +11,7 @@ const me_authors = createReducer(initialState, (builder) =>
       const newState = {
         ... state, // Este spread copia el estado inicial
         profile: action.payload.info
+        
       }
       return newState
     })

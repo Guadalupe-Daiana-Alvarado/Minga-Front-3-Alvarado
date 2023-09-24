@@ -6,6 +6,7 @@ import createReplyAction from "../actions/replyComments";
 
 const initialState = {
     comments: [],
+    replies: [],
     error: null
 }
 
@@ -79,17 +80,18 @@ const commentReducer = (state = initialState, action) => {
                 ...state,
                 error: action.payload.error
             };
-        case createReplyAction.fulfilled.type:
-            return {
+            case createReplyAction.fulfilled.type:
+                return {
                     ...state,
-                    replies: [action.payload.reply, ...state.replies],
+                    replies: [action.payload.reply, ...state.replies], // Agregar la nueva respuesta al estado de respuestas
                     error: null
                 };
-        case createReplyAction.rejected.type:
-            return {
+            case createReplyAction.rejected.type:
+                return {
                     ...state,
                     error: action.payload.error
                 };
+            
         default:
             return state;
     }
