@@ -12,10 +12,12 @@ const Display = () => {
   const userToken = localStorage.getItem("token")
   const headers = { headers: { "authorization": `Bearer ${userToken}` } }
   const logout = async () => {
-    axios.post("http://localhost:8000/auth/signout", null, headers )
-    .then(res => {localStorage.clear()
-    navigate("/")})
-    .catch(res => console.log(res))
+    axios.post("http://localhost:8000/auth/signout", null, headers)
+      .then(res => {
+        localStorage.clear()
+        navigate("/")
+      })
+      .catch(res => console.log(res))
   }
 
   return (
@@ -23,15 +25,14 @@ const Display = () => {
       <ButtonNav to="/" title="Home" />
       <ButtonNav to={role ? "/Mangas" : "/NotAllow"} title="Mangas" />
       {!role ? (<ButtonNav to="/login" title="Login" />) : ("")}
-      
-      {role ? (<button   className='cursor-pointer text-pink-400 bg-white p-1 w-48 rounded-md font-semibold text-2xl' onClick={logout}>Logout</button>) : ("")}
-      
-      {role ? (<ButtonNav to="/authors/me" title="Profile" />):("")}
-      {role ? (<ButtonNav to="/newRole" title="NewRole" />):("")}
-      {role ? (<ButtonNav to="/MyMangas" title="My Mangas" />):("")}
+
+      {role ? (<button className='cursor-pointer text-pink-400 bg-white p-1 w-48 rounded-md font-semibold text-2xl' onClick={logout}>Logout</button>) : ("")}
+
+      {role ? (<ButtonNav to="/authors/me" title="Profile" />) : ("")}
+      {role ? (<ButtonNav to="/newRole" title="NewRole" />) : ("")}
+      {role ? (<ButtonNav to="/MyMangas" title="My Mangas" />) : ("")}
       {!role ? (<ButtonNav to="/register" title="Register" />) : ("")}
 
-      
 
     </nav>
   );
