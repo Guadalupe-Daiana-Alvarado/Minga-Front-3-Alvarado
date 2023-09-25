@@ -11,7 +11,7 @@ const authorData = createAction("getAuthordata", ({ info }) => {
 });
 
 // Acción para obtener la lista de autores con autenticación
-const fetchAuthors = createAsyncThunk('authors', async (info) => {
+const fetchAuthors = createAsyncThunk('authors', async (token) => {
   try {
     //aca obtengo el token desde donde lo tengo almacenado
     const token = localStorage.getItem("token")
@@ -23,8 +23,8 @@ const fetchAuthors = createAsyncThunk('authors', async (info) => {
 
     // Realizar la solicitud con los headers configurados
     const response = await axios.get('http://localhost:8000/authors/admin', { headers });
-    return response.data.response
-
+    console.log(response.data)
+    return response.data
   }
   catch (error) {
     console.log(error)

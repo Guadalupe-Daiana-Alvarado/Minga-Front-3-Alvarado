@@ -1,6 +1,6 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { authorData } from "../actions/me_authors";
-import { fetchAuthors, toggleAuthorStatus } from "../actions/me_authors";
+import { authorData, toggleAuthorStatus, fetchAuthors } from "../actions/me_authors";
+
 
 /*const initialState = {
   profile: {}
@@ -28,22 +28,21 @@ const initialState = {
 const me_authors = createReducer(initialState, (builder) => {
   builder
     .addCase(fetchAuthors.fulfilled, (state, action) => {
-      state.authors = action.payload; // Almacena la lista de autores cuando se obtienen por primera vez
-      state.error = null;
-      const newState = { ...state }
-      if (action.payload.error) {
-        newState.error = action.payload.error
-        newState.authors = initialState.authors
-
+      if (action.payload && action.payload.error) {
+        state.error = action.payload.error;
+        state.authors = [];
       } else {
-        newState.authors = action.payload
-        newState.error = null
+        state.authors = action.payload;
+        state.error = null;
       }
-      return newState
     })
+
+
     .addCase(fetchAuthors.rejected, (state, action) => {
+      // En caso de un error de red o similar, actualiza el estado con el mensaje de error
       state.error = action.error.message;
     })
+    // Resto de los casos como en tu código original
     .addCase(toggleAuthorStatus.fulfilled, (state, action) => {
       // Encuentra y actualiza el autor en la lista
       const updatedAuthors = state.authors.map((author) =>
