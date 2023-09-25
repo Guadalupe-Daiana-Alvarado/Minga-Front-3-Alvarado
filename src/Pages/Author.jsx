@@ -11,9 +11,9 @@ const Author = () => {
   console.log(profile)
   const mangasNews = useSelector((store) => store.mangasNews_reduce.mangas_news);
   const dispatch = useDispatch();
-  const store = useSelector((store)=>store)
+  const store = useSelector((store) => store)
   console.log(store)
- 
+
 
   function getDataAuthor() {
     axios("http://localhost:8000/authors/me")
@@ -91,8 +91,8 @@ const Author = () => {
         <div className='flex mt-12 justify-center items-center'>
           <button
             className={`${showNewMangas
-                ? 'bg-pink-400 text-white'
-                : 'bg-white text-black'
+              ? 'bg-pink-400 text-white'
+              : 'bg-white text-black'
               } h-8 w-20 rounded-md hover:bg-pink-300`}
             onClick={() => toggleMangas(true)}
           >
@@ -100,8 +100,8 @@ const Author = () => {
           </button>
           <button
             className={`${showNewMangas
-                ? 'bg-white text-black'
-                : 'bg-pink-400 text-white'
+              ? 'bg-white text-black'
+              : 'bg-pink-400 text-white'
               } h-8 w-20 rounded-md hover:bg-pink-300`}
             onClick={() => toggleMangas(false)}
           >
