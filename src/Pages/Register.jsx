@@ -78,7 +78,6 @@ const Register = () => {
 
       </div >
 
-
     </>
   );
 }

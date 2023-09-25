@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import authorData from '../../redux/actions/me_authors.js';
+import { authorData } from '../../redux/actions/me_authors.js';
 import mangasData from '../../redux/actions/manga_news.js';
 
 const Author = () => {
@@ -90,21 +90,19 @@ const Author = () => {
       {Array.isArray(mangasNews) && mangasNews.length >= 8 && (
         <div className='flex mt-12 justify-center items-center'>
           <button
-            className={`${
-              showNewMangas
+            className={`${showNewMangas
                 ? 'bg-pink-400 text-white'
                 : 'bg-white text-black'
-            } h-8 w-20 rounded-md hover:bg-pink-300`}
+              } h-8 w-20 rounded-md hover:bg-pink-300`}
             onClick={() => toggleMangas(true)}
           >
             New
           </button>
           <button
-            className={`${
-              showNewMangas
+            className={`${showNewMangas
                 ? 'bg-white text-black'
                 : 'bg-pink-400 text-white'
-            } h-8 w-20 rounded-md hover:bg-pink-300`}
+              } h-8 w-20 rounded-md hover:bg-pink-300`}
             onClick={() => toggleMangas(false)}
           >
             Old
