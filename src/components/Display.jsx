@@ -9,6 +9,7 @@ const Display = () => {
   const [userRole, setUserRole] = useState(0);
   const navigate = useNavigate();
   const role = localStorage.getItem("role")
+  console.log(role)
   const userToken = localStorage.getItem("token")
   const headers = { headers: { "authorization": `Bearer ${userToken}` } }
   const logout = async () => {
@@ -32,6 +33,8 @@ const Display = () => {
       {role ? (<ButtonNav to="/newRole" title="NewRole" />) : ("")}
       {role ? (<ButtonNav to="/MyMangas" title="My Mangas" />) : ("")}
       {!role ? (<ButtonNav to="/register" title="Register" />) : ("")}
+      {role ? (<ButtonNav to="/admin" title="Admin" />) : ("")}
+
 
 
     </nav>
