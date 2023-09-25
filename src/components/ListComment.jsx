@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import commentAction from '../../redux/actions/commentsAction';
 import createComment from '../../redux/actions/createCommentAction';
-import createReplyAction from '../../redux/actions/replyComments';
+import commentReplyAction from '../../redux/actions/commentsReplyActions'; // Importa la acción de comentarios y respuestas
 import EditComment from '../components/EditComments';
 import DeleteComment from './DeleteComment';
 import { ToastContainer, toast } from 'react-toastify';
@@ -14,7 +14,8 @@ import CreateReply from './ReplyComment';
 const Comment = ({ open, setOpen, chapter_id, chapterName }) => {
   const comment = useRef();
   const { user, token } = useSelector((store) => store.user_reduce);
-  const { comments, error } = useSelector((store) => store.commentsReducer);
+  const {comments} = useSelector((store)=>store.commentsReducer); // Utiliza el selector para obtener los comentarios
+  
   const dispatch = useDispatch();
   const [replies, setReplies] = useState([]);
   const [edit, setEdit] = useState({
@@ -37,6 +38,14 @@ const Comment = ({ open, setOpen, chapter_id, chapterName }) => {
       })
     );
   }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(
+      commentReplyAction({
+        token,
+      })
+    ); // Llama a la acción de comentarios y respuestas para obtener los datos actualizados
+  }, [dispatch, token]);
 
   const sendAndCreateComment = async () => {
     const commentText = comment.current.value;
@@ -149,6 +158,7 @@ const Comment = ({ open, setOpen, chapter_id, chapterName }) => {
 
                   {/* Mostrar respuestas si existen */}
                   {comment.replies && comment.replies.length > 0 && (
+                    
                     <div className="replies-section">
                       <h3>Respuestas:</h3>
                       {comment.replies.map((reply, replyIndex) => (
@@ -158,7 +168,8 @@ const Comment = ({ open, setOpen, chapter_id, chapterName }) => {
                         </div>
                       ))}
                     </div>
-                  )}
+                  )
+}
                 </div>
               ))}
             </div>

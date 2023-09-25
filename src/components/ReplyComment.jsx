@@ -3,9 +3,13 @@ import { useDispatch } from 'react-redux';
 import createReplyAction from '../../redux/actions/replyComments';
 
 const CreateReply = ({ parentCommentId, user }) => {
+    console.log(user)
+    const token = localStorage.getItem("token")
+    console.log(token)
     const [replyText, setReplyText] = useState('');
     const dispatch = useDispatch();
 
+    console.log(user.email, replyText, parentCommentId)
     const handleCreateReply = async () => {
         try {
             
@@ -19,11 +23,12 @@ const CreateReply = ({ parentCommentId, user }) => {
 
             const info = {
                 parentCommentId,
-                email: user.email,
+                user_id: user._id,
                 text: replyText,
-                token: user.token,
+                token: token,
                 // Otros datos necesarios para crear la respuesta
             };
+            
 
             // Dispatch de la acción para crear la respuesta
             await dispatch(createReplyAction(info));
