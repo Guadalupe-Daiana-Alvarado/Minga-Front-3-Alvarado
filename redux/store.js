@@ -6,6 +6,8 @@ import mangasReducer from './reducers/mangasReducer';
 import mangaReduce from './reducers/mangaReduce'
 import commentsReducer from './reducers/commentsReducer';
 import { loginReducer } from './reducers/login';
+import mangaDetailReducer from '../redux/reducers/mangaDetail.js';
+import chaptersMangaDetailReducer from './reducers/chaptersMangaDetail';
 
 
 export const store = configureStore({
@@ -17,6 +19,9 @@ export const store = configureStore({
         mangasNew : mangaReduce,
         commentsReducer, 
         user_reduce:loginReducer,
+        manga: mangaDetailReducer,
+        chaptersMangaDetail: chaptersMangaDetailReducer,
+
     }
 
     // Otros reductores aquÃ­...

@@ -85,7 +85,7 @@ const Router = createBrowserRouter([
             },
 
             {
-                path: '/manga/:id',
+                path: '/manga/:id/',
                 element: <MangaDetail/>
             },
             
