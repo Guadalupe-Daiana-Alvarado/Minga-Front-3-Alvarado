@@ -42,7 +42,7 @@ const me_authors = createReducer(initialState, (builder) => {
       // En caso de un error de red o similar, actualiza el estado con el mensaje de error
       state.error = action.error.message;
     })
-    // Resto de los casos como en tu código original
+
     .addCase(toggleAuthorStatus.fulfilled, (state, action) => {
       // Encuentra y actualiza el autor en la lista
       const updatedAuthors = state.authors.map((author) =>
