@@ -1,78 +1,143 @@
-//SPRINT4(M03-VISTAS)//
-// componente responzable de mostrar  la tabla y  gestionar las acciones de activar/desactivar autores.//
-
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector, } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchAuthors } from '../../redux/actions/me_authors';
 import { toggleAuthorStatus } from '../../redux/actions/me_authors';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const AdminPanel = () => {
     const dispatch = useDispatch();
     const activeAuthors = useSelector((state) => state.author_reduce.authors.activeAuthors);
-    const inactiveAuthors = useSelector((state) => state.author_reduce.authors.inactiveAuthors)
-    const userRole = useSelector((state) => state.author_reduce.authors.activeAuthors);
-
-    console.log(activeAuthors)
-    console.log(inactiveAuthors)
-    console.log(userRole)
+    const inactiveAuthors = useSelector((state) => state.author_reduce.authors.inactiveAuthors);
+    const user = useSelector((state) => state.user_reduce);
+    console.log(user);
     const { token } = useSelector((state) => state.user_reduce);
-    const navigate = useNavigate()
-    useEffect(() => {
-        // Cargar la lista de autores al cargar el componente
-        dispatch(fetchAuthors(token));
 
-        /*if (userRole !== 3) {
-            // Redirigir al usuario a la página de inicio si no es un admin
-            navigate("/");
-        }*/
-    }, [dispatch, navigate, token, userRole]);
+    const navigate = useNavigate();
+    const [selectedAuthor, setSelectedAuthor] = useState(null);
+
+    useEffect(() => {
+        dispatch(fetchAuthors(token));
+    }, [dispatch, navigate, token, user]);
 
     const handleToggleStatus = (author) => {
-        // Cambiar el estado del autor y actualizar en el frontend y la DB
-        dispatch(toggleAuthorStatus(author));
-    };
+        setSelectedAuthor(author);
 
+        Swal.fire({
+            title: 'Confirmación',
+            text: `¿Estás seguro de que deseas realizar esta acción en ${author.name}?`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Aceptar',
+            cancelButtonText: 'Cancelar',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                dispatch(toggleAuthorStatus(author));
+            }
+        });
+    };
 
     return (
         <>
-            <div>
-                <h2>Admin Panel</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Estado</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {inactiveAuthors?.map((author) => (
-                            <tr key={author._id}>
-                                <td>{author.name}</td>
-                                <td>
-                                    <button onClick={() => handleToggleStatus(author)}>
-                                        Activar
-                                    </button>
-                                </td>
+            (
+            <div className="flex justify-center items-center h-screen">
+                <div className="bg-white p-8 shadow-md rounded-md">
+                    <h2 className="text-2xl font-semibold mb-4">Admin Panel</h2>
+                    <table className="w-full border-collapse border border-gray-300">
+                        <thead>
+                            <tr>
+                                <th className="border border-gray-300 p-2">Nombre</th>
+                                <th className="border border-gray-300 p-2">Estado</th>
                             </tr>
-                        ))}
-                        {activeAuthors?.map((author) => (
-                            <tr key={author._id}>
-                                <td>{author.name}</td>
-                                <td>
-                                    <button onClick={() => handleToggleStatus(author)}>
-                                        Desactivar
-                                    </button>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            {inactiveAuthors?.map((author) => (
+                                <tr key={author._id} className="border border-gray-300">
+                                    <td className="border border-gray-300 p-2">{author.name}</td>
+                                    <td className="border border-gray-300 p-2">
+                                        <button
+                                            onClick={() => handleToggleStatus(author)}
+                                            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                                        >
+                                            Activar
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))}
+                            {activeAuthors?.map((author) => (
+                                <tr key={author._id} className="border border-gray-300">
+                                    <td className="border border-gray-300 p-2">{author.name}</td>
+                                    <td className="border border-gray-300 p-2">
+                                        <button
+                                            onClick={() => handleToggleStatus(author)}
+                                            className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+                                        >
+                                            Desactivar
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
             </div>
+            )
+
+
         </>
     );
 }
 
-
 export default AdminPanel;
 
+
+/*return (
+    <>
+        {user && user.role === 3 ? (
+            <div className="flex justify-center items-center h-screen">
+                <div className="bg-white p-8 shadow-md rounded-md">
+                    <h2 className="text-2xl font-semibold mb-4">Admin Panel</h2>
+                    <table className="w-full border-collapse border border-gray-300">
+                        <thead>
+                            <tr>
+                                <th className="border border-gray-300 p-2">Nombre</th>
+                                <th className="border border-gray-300 p-2">Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {inactiveAuthors?.map((author) => (
+                                <tr key={author._id} className="border border-gray-300">
+                                    <td className="border border-gray-300 p-2">{author.name}</td>
+                                    <td className="border border-gray-300 p-2">
+                                        <button
+                                            onClick={() => handleToggleStatus(author)}
+                                            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                                        >
+                                            Activar
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))}
+                            {activeAuthors?.map((author) => (
+                                <tr key={author._id} className="border border-gray-300">
+                                    <td className="border border-gray-300 p-2">{author.name}</td>
+                                    <td className="border border-gray-300 p-2">
+                                        <button
+                                            onClick={() => handleToggleStatus(author)}
+                                            className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+                                        >
+                                            Desactivar
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        ) : (
+            navigate('/')
+        )}
+    </>
+);
+}*/
