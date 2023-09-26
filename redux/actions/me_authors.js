@@ -39,7 +39,7 @@ const toggleAuthorStatus = createAsyncThunk('toggleAuthorStatus', async (author)
     const updatedAuthor = { ...author, active: !author.active };
 
     // Actualizar el estado del autor en la base de datos
-    await axios.put(`/api/authors/${author.id}`, updatedAuthor);
+    await axios.put(`/api/authors/${author._id}`, updatedAuthor);
 
     // Devolver el autor actualizado como resultado exitoso
     return updatedAuthor;
