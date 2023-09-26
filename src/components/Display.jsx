@@ -17,7 +17,6 @@ const Display = () => {
       .then(res => {
         localStorage.clear()
         navigate("/")
-
       })
       .catch(res => console.log(res))
   }
