@@ -13,10 +13,10 @@ const deleteChapterAction = createAsyncThunk("deleteChapter", async ({id, token}
       }
     );
     console.log(response);
-    return response.data; // Puedes devolver la respuesta si es necesario
+    return response.data; 
   } catch (error) {
     console.error(error);
-    throw error; // Puedes lanzar el error para que Redux gestione los errores
+    throw error; 
   }
 });
 

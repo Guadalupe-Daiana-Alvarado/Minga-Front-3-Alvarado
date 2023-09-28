@@ -1,16 +1,18 @@
-// AuthorForm.jsx
-import img from '../../public/image/Frame 50.png'
 import React, { useState, useRef } from 'react';
-import ButtonForm from '../components/ButtonForm';
-import Alert from '../components/Alert';
-import axios from 'axios';
+import ButtonForm from '../components/ButtonForm.jsx';
+import Alert from '../components/Alert.jsx';
+import { firebaseApp } from '../../fireBase/firebase.js';
+
+import {upLoadFile} from '../../fireBase/firebase.js'
+
+
 
 const AuthorForm = () => {
   const nameRef = useRef("Lucas Ezequiel");
   const last_NameRef = useRef("Silva");
   const cityRef = useRef("Buenos Aires, Argentina");
   const birthdateRef = useRef("2023-12-28");
-  const imageUrlRef = useRef("https://conceptodefinicion.de/wp-content/uploads/2016/01/Perfil2.jpg");
+  const imageRef = useRef(null);
 
   const [show, setShow] = useState(false);
   const [alertType, setAlertType] = useState(null);
@@ -21,177 +23,151 @@ const AuthorForm = () => {
   const [lastNameError, setLastNameError] = useState("");
   const [cityError, setCityError] = useState("");
   const [birthdateError, setBirthdateError] = useState("");
-  const [imageUrlError, setImageUrlError] = useState("");
+  const [file, setFile] = useState(null)
+
   
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
-    // Validar campos antes de enviar la solicitud
-    let isValid = true;
+    console.log(file)
+    const result = await upLoadFile(file)
+    console.log(result)
+/* 
+    const imageFile = e.target.files[0];
+    const archivoRef = ref(storage, `image/${imageFile.name}`);
+    await uploadBytes(archivoRef, imageFile);
+    const urlDescarga = await getDownloadURL(archivoRef);
+ 
+    const storageRef = storage.ref();
+    const imageStorageRef = storageRef.child(`images/${imageFile.name}`);
+    await imageStorageRef.put(imageFile);
+    const imageUrl = await imageStorageRef.getDownloadURL(); */
 
-    if (!nameRef.current.value) {
-      setNameError("Name is required");
-      isValid = false;
-    } else {
-      setNameError("");
-    }
+    const cityCountryValue = cityRef.current.value;
+    const [city, country] = cityCountryValue.split(',').map((item) => item.trim());
+    const formData = {
+      name: nameRef.current.value,
+      last_name: last_NameRef.current.value,
+      city: city,
+      country: country,
+      date: birthdateRef.current.value,
+      photo: file,
+    };
 
-    if (!last_NameRef.current.value) {
-      setLastNameError("Last Name is required");
-      isValid = false;
-    } else {
-      setLastNameError("");
-    }
 
-    if (!cityRef.current.value) {
-      setCityError("City and Country are required");
-      isValid = false;
-    } else {
-      setCityError("");
-    }
 
-    if (!birthdateRef.current.value) {
-      setBirthdateError("Date of birth is required");
-      isValid = false;
-    } else {
-      setBirthdateError("");
-    }
+/*     try { 
+      const imageRef = storageRef.child(`images/${imageFile.name}`);
+      await imageRef.put(imageFile);
+    } catch (error) {
+      console.error('Error al cargar la imagen en Firebase Storage:', error);
+    } */
 
-    if (!imageUrlRef.current.value) {
-      setImageUrlError("Image URL is required");
-      isValid = false;
-    } else {
-      setImageUrlError("");
-    }
+    //ENVIO DE LA DATA//////////////////////////////////
+    try {
+      const response = await fetch('http://localhost:8000/authors', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json', // Asegúrate de configurar los encabezados adecuadamente
+        },
+        body: JSON.stringify(formData), // Aquí enviamos los datos del formulario como JSON
+      });
 
-    if (isValid) {
-      try {
-        const cityCountryValue = cityRef.current.value;
-        const [city, country ] = cityCountryValue.split(',').map((item) => item.trim());
-
-        const formData = {
-          name: nameRef.current.value,
-          last_name: last_NameRef.current.value,
-          city: city,
-          country: country,
-          date: birthdateRef.current.value,
-          photo: imageUrlRef.current.value,
-        };
-
-        const miStorage = localStorage.getItem("token"); // Recupera el token de localStorage
-        const authToken = 'Bearer ' + miStorage; // Utiliza el token recuperado
-
-        const config = {
-          headers: {
-            'Authorization': authToken,
-          },
-        };
-        
-        // Realiza la solicitud POST con Axios incluyendo el encabezado de autorización
-        const { data } = await axios.post('http://localhost:8000/authors', formData, config);
-
-        // Mostrar alerta de éxito
-        setAlertType("success");
-        setAlertMessage("Its author was successfully created");
-        setShow(true);
-      } catch (error) {    
-        if (error.response) {
-        // La respuesta del servidor contiene detalles del error
-        console.error('Error de respuesta:', error.response.data);
-      } else if (error.request) {
-        // La solicitud se hizo pero no se recibió una respuesta
-        console.error('Error de solicitud:', error.request);
+      if (response.ok) {
+        // La solicitud fue exitosa
+        console.log('Datos enviados correctamente');
+        // Puedes realizar acciones adicionales aquí, como redirigir al usuario o mostrar un mensaje de éxito.
       } else {
-        // Ocurrió un error durante la configuración de la solicitud
-        console.error('Error de configuración de solicitud:', error.message); 
-        setShow(false);
+        // La solicitud no fue exitosa
+        console.error('Error al enviar datos al servidor');
+        setAlertType("error");
+        setAlertMessage("Error al enviar datos al servidor");
+        setShow(true);
       }
-       // Mostrar alerta de error
-       setAlertType("error");
-       setAlertMessage("You do not have the required permissionss");
-       setShow(true);
-      }
+    } catch (error) {
+      console.error('Error:', error);
+      setAlertType("error");
+      setAlertMessage("Error al enviar datos al servidor");
+      setShow(true);
     }
   };
-  
+
   return (
     <main className='w-full h-3/4 bg-no-repeat bg-cover flex flex-col justify-around' style={{ backgroundImage: "url('./image/backgroundMain.png')" }}>
       <div className='bg-neutral-100 w-full h-1/2 p-5 flex flex-col items-center'>
         <h2 className='p-5  bg-white text-bold'>Nuevo Autor</h2>
-        <img src={img} alt="" />
       </div>
 
       <div className='bg-neutral-100 w-full min-h-full flex flex-col items-center'>
-        <form className='w-11/12 min-h-3/4 flex flex-col items-center' id="signup">
-          <ul>
+      <form className='w-11/12 min-h-3/4 flex flex-col items-center' id="signup" onSubmit={handleSubmit}>          <ul>
             <div>
               <label htmlFor="name">
-              <input
-                defaultValue={nameRef.value}
-                placeholder="Nombre"
-                className='p-3 m-1 w-60 bg-neutral-100 border-b-indigo-500 '
-                type="text"
-                id="name"
-                ref={nameRef}
-                required
-              /></label>
+                <input
+                  defaultValue={nameRef.value}
+                  placeholder="Nombre"
+                  className='p-3 m-1 w-60 bg-neutral-100 border-b-indigo-500 '
+                  type="text"
+                  id="name"
+                  ref={nameRef}
+                  required
+                />
+              </label>
               <span className="error">{nameError}</span>
             </div>
 
             <div>
               <label htmlFor="Last_Name">
-              <input
-                defaultValue={last_NameRef.value}
-                placeholder="Apellido"
-                className='p-3 m-1 w-60 bg-neutral-100 border-b-indigo-500 '
-                type="text"
-                id="last_Name"
-                ref={last_NameRef}
-                required
-              /></label>
+                <input
+                  defaultValue={last_NameRef.value}
+                  placeholder="Apellido"
+                  className='p-3 m-1 w-60 bg-neutral-100 border-b-indigo-500 '
+                  type="text"
+                  id="last_Name"
+                  ref={last_NameRef}
+                  required
+                />
+              </label>
               <span className="error">{lastNameError}</span>
             </div>
 
             <div>
               <label htmlFor="city">
-              <input
-                defaultValue={cityRef.value}
-                placeholder="Ciudad, País"
-                className='p-3 m-1 w-60 bg-neutral-100 border-b-indigo-500 '
-                type="text"
-                id="city"
-                ref={cityRef}
-                required
-              /></label>
+                <input
+                  defaultValue={cityRef.value}
+                  placeholder="Ciudad, País"
+                  className='p-3 m-1 w-60 bg-neutral-100 border-b-indigo-500 '
+                  type="text"
+                  id="city"
+                  ref={cityRef}
+                  required
+                />
+              </label>
               <span className="error">{cityError}</span>
             </div>
 
             <div>
               <label htmlFor="birthdate">
-              <input
-                defaultValue={birthdateRef.value}
-                placeholder="Fecha de nacimiento"
-                className='p-3 m-1 w-60 bg-neutral-100 border-b-indigo-500 '
-                type="date"
-                id="birthdate"
-                ref={birthdateRef}
-                required
-              /></label>
+                <input
+                  defaultValue={birthdateRef.value}
+                  placeholder="Fecha de nacimiento"
+                  className='p-3 m-1 w-60 bg-neutral-100 border-b-indigo-500 '
+                  type="date"
+                  id="birthdate"
+                  ref={birthdateRef}
+                  required
+                />
+              </label>
               <span className="error">{birthdateError}</span>
             </div>
 
             <div>
               <label htmlFor="image">
-              <input
-                defaultValue={imageUrlRef.value}
-                placeholder="URL de la imagen"
-                className='p-3 m-1 w-60 bg-neutral-100 border-b-indigo-500 '
-                type="url"
-                id="imageUrl"
-                ref={imageUrlRef}
-                required
-              /></label>
-              <span className="error">{imageUrlError}</span>
+                <input 
+                type="file" 
+                id="image" 
+                ref={imageRef} 
+                onChange={e => setFile(e.target.files[0])}
+               />
+              </label>
             </div>
 
             <li>
@@ -204,15 +180,13 @@ const AuthorForm = () => {
               />
             </li>
             <li>
-            {alertType === "error" && <Alert handleRegisterSubmit={handleSubmit} />}
-
+              {alertType === "error" && <Alert handleRegisterSubmit={handleSubmit} />}
             </li>
           </ul>
         </form>
-        {/*show && <Alert message={alertMessage} type={alertType} />*/} 
       </div>
     </main>
   );
 };
 
-export default AuthorForm; 
+export default AuthorForm;

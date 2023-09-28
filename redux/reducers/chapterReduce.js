@@ -2,7 +2,7 @@
   import editChapterAccion from "../actions/editChapterAccion.js";
   
   const initialState = {
-    chapter: [], // Cambiado el nombre de "chapter" a "chapters" para reflejar que es una lista de capítulos
+    chapter: [], 
   };
   
   const chapterReduce = createReducer(initialState, (builder) =>

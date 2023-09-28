@@ -41,17 +41,17 @@ const EditChapter = () => {
       e.preventDefault();
 
       if (!id) {
-        console.error('ID de capítulo no encontrado.');
+        console.error('Chapter ID not found.');//ID de capítulo no encontrado.
         return;
       }
 
       // Muestra una alerta de confirmación antes de la edición
       const confirmEdit = await Swal.fire({
-        title: '¿Estás seguro de editar este capítulo?',
+        title: '¿Are you sure about editing this chapter??',//¿Estás seguro de editar este capítulo?
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonText: 'Sí, editar',
-        cancelButtonText: 'Cancelar',
+        confirmButtonText: 'Sí, editaYes, edit',
+        cancelButtonText: 'Cancel',
       });
 
       if (!confirmEdit.isConfirmed) {
@@ -70,11 +70,11 @@ const EditChapter = () => {
         await dispatch(editChapterAccion({ id, info: data, token }));
         Swal.fire({
           icon: 'success',
-          title: '¡Edición exitosa!',
-          text: 'El capítulo se ha editado correctamente.',
+          title: 'Successful edition!',
+          text: 'The chapter has been edited successfully.',
         });
       } catch (error) {
-        console.error("Error al editar el capítulo:", error);
+        console.error("Error editing chapter:", error);
         // Maneja el error, por ejemplo, muestra un mensaje de error al usuario
         return;
       }
@@ -82,7 +82,7 @@ const EditChapter = () => {
       // Llama a getManga para actualizar la lista de capítulos
       getManga();
     } catch (error) {
-      console.error('Error en la solicitud PUT:', error);
+      console.error('PUT request failed:', error);
     }
   };
 
@@ -93,11 +93,11 @@ const EditChapter = () => {
 
       // Muestra una alerta de confirmación antes de la eliminación
       const confirmDelete = await Swal.fire({
-        title: '¿Estás seguro de eliminar este capítulo?',
+        title: 'Are you sure to delete this chapter?',
         icon: 'question',
         showCancelButton: true,
-        confirmButtonText: 'Sí, eliminar',
-        cancelButtonText: 'Cancelar',
+        confirmButtonText: 'Yes, delete',
+        cancelButtonText: 'Cancel',
       });
 
       if (!confirmDelete.isConfirmed) {
@@ -109,11 +109,11 @@ const EditChapter = () => {
         await dispatch(deleteChapterAccion({ id, token }));
         Swal.fire({
           icon: 'success',
-          title: '¡Eliminación exitosa!',
-          text: 'El capítulo se ha eliminado correctamente.',
+          title: 'Successful removal!',
+          text: 'The chapter has been successfully deleted.',
         });
       } catch (error) {
-        console.error("Error al eliminar el capítulo:", error);
+        console.error("Error deleting chapter:", error);
         // Maneja el error, por ejemplo, muestra un mensaje de error al usuario
         return;
       }
@@ -139,7 +139,6 @@ const EditChapter = () => {
       setId(null);
     }
   };
-
   // Carga los datos del manga al montar el componente
   useEffect(() => {
     getManga();

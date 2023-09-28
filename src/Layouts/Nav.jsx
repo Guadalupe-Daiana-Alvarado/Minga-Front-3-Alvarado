@@ -9,8 +9,8 @@ const Nav = () => {
   
   const email = JSON.parse(localStorage.getItem("email"))
   const photo = JSON.parse(localStorage.getItem("photo"))
-  console.log(email)
-  console.log(photo)
+  ////console.log(email)
+  //console.log(photo)
 
   let Drawer = () => (
     

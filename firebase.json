@@ -1,0 +1,8 @@
+{
+    "rules": {
+      "storage": {
+        "rules": "service firebase.storage {\n  match /b/{bucket}/o {\n    match /{allPaths=**} {\n      allow read, write;\n    }\n  }\n}"
+      }
+    }
+  }
+  
