@@ -18,6 +18,7 @@ import ChapterForm from "../Pages/ChapterForm"
 import AdminPanel from '../components/AdminPanel'
 import MyMangas from '../Pages/MyMangas'
 import EditMangas from '../Pages/EditMangas'
+import DocumentacionApi from '../Pages/DocumentacionApi'
 
 const Router = createBrowserRouter([
 
@@ -122,7 +123,14 @@ const Router = createBrowserRouter([
                 path: "/admin",
                 element: <AdminPanel />
 
+            },
+            {
+                path: "/documentacionApi",
+                element: <DocumentacionApi />
+
             }
+
+
         ]
     }
 
