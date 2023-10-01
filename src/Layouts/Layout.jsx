@@ -1,5 +1,5 @@
 import React from 'react';
-import Nav from './Nav';
+import Nav from '../Layouts/Nav'
 import Footer from '../Layouts/Footer';
 import { Outlet } from 'react-router-dom';
 
