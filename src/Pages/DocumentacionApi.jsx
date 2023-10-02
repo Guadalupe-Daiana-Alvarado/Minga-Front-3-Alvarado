@@ -1,24 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { showSuccessAlertAction, showErrorAlertAction } from '../../redux/actions/DocuApiActions'; // Asegúrate de que la ruta sea correcta
+
 
 function DocumentacionApi() {
-    const [showSuccessAlert, setShowSuccessAlert] = useState(false);
-    const [showErrorAlert, setShowErrorAlert] = useState(false);
+    const showSuccessAlert = useSelector(state => state.alert.showSuccessAlert); // Accede al estado de alerta en Redux
+    const showErrorAlert = useSelector(state => state.alert.showErrorAlert); // Accede al estado de alerta en Redux
+    const dispatch = useDispatch();
 
-    const closeSuccessAlert = () => setShowSuccessAlert(false);
-    const closeErrorAlert = () => setShowErrorAlert(false);
+    const closeSuccessAlert = () => dispatch(showSuccessAlertAction());
+    const closeErrorAlert = () => dispatch(showErrorAlertAction());
 
-    const handleConsultaExitosa = () => {
-        setShowSuccessAlert(true);
-
-        // Redireccionar a la página de documentación después de 2 segundos
-        setTimeout(() => {
+    useEffect(() => {
+        // Función para redireccionar después de 2 segundos
+        const redirectToDocumentation = () => {
             window.location.href = "http://localhost:8000/api-doc/";
-        }, 2000); // 2000 milisegundos = 2 segundos (puedes ajustar este valor)
-    };
+        };
 
-    const handleConsultaError = () => {
-        setShowErrorAlert(true);
-    };
+        // Mostrar la alerta de éxito y redirigir después de 2 segundos
+        if (showSuccessAlert) {
+            setTimeout(() => {
+                closeSuccessAlert(); // Cierra la alerta de éxito después de redirigir
+                redirectToDocumentation();
+            }, 2000); // 2000 milisegundos = 2 segundos (puedes ajustar este valor)
+        }
+    }, [showSuccessAlert, closeSuccessAlert]);
+
 
     return (
         <div className="flex flex-col items-center justify-center h-screen bg-pink-500 text-white">
@@ -38,7 +46,7 @@ function DocumentacionApi() {
                     className="text-blue-500 hover:underline"
                     onClick={(e) => {
                         e.preventDefault(); // Prevenir la navegación estándar
-                        handleConsultaExitosa(); // Mostrar la alerta de éxito y redirigir
+                        dispatch(showSuccessAlertAction()); // Mostrar la alerta de éxito y redirigir
                     }}
                 >
                     aquí
