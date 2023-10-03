@@ -5,6 +5,7 @@ import Alert from '../components/Alert';
 import { useRef } from 'react';
 import axios from 'axios';
 import '../assets/style.css'
+import registerImg from '../../public/image/register.svg'
 
 
 const Register = () => {
@@ -42,44 +43,61 @@ const Register = () => {
 
   return (
     <>
-      <div className='w-full min-h-screen bg-red-500 flex flex-col md:flex'>
-        <div className='bg-red-200 min- w-full md:w-1/2 min-h-screen flex flex-col justify-center items-center'>
-          <h2>Welcome!</h2>
-          <p>Discord manga and comics,track your progres,
-            have fun,read manga.
-          </p>
-          <Alert handleRegisterSubmit={handleRegisterSubmit} />
-          <form className='bg-blue-200 h-5/6' onSubmit={(e) => handleRegisterSubmit(e)}>
+      <div className="container max-w-full mx-auto md:py-24 px-6">
+        <div className="max-w-screen-xl mx-auto flex items-center justify-center">
+          <div className="w-1/2 pr-4">
+            <img src={registerImg} alt="register" className="w-full h-auto" />
+          </div>
+          <div className="w-1/2 pl-4">
+            <div className="text-center font-semibold text-black">
+              Welcome!
+            </div>
+            <div className="text-center font-base text-black">
+              Discover mangas and comics, track your progress, have fun, read manga
+            </div>
+            <Alert handleRegisterSubmit={handleRegisterSubmit} />
+            <form className="mt-8" onSubmit={handleRegisterSubmit}>
+              <div className="mx-auto max-w-lg">
+                <div className="py-1">
+                  <span className="px-1 text-sm text-gray-600">Email</span>
+                  <input
+                    ref={email}
+                    type="email"
+                    className="text-md block px-3 py-2 rounded-lg w-full bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
+                  />
+                </div>
+                <div className="py-1">
+                  <span className="px-1 text-sm text-gray-600">Photo URL</span>
+                  <input
+                    ref={photo}
+                    type="text" // Cambiamos el tipo de input a "text" para cargar una URL de foto
+                    className="text-md block px-3 py-2 rounded-lg w-full bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
+                  />
+                </div>
 
-            <div className="form-group">
-              <label htmlFor="email"></label>
-              <input className='p-3 m-1 w-60 bg-neutral-100 border-b-indigo-500 ' type="text" id="email" name="email" placeholder='Email' ref={email} />
-              <div className="form-group">
-                <label htmlFor="photo"></label>
-                <input className='p-3 m-1 w-60 bg-neutral-100 border-b-indigo-500 ' type="text" id="photo" name="photo" placeholder='Photo' ref={photo} />
+                <div className="py-1">
+                  <span className="px-1 text-sm text-gray-600">Password</span>
+                  <input
+                    ref={password}
+                    type="password"
+                    className="text-md block px-3 py-2 rounded-lg w-full bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none"
+                  />
+
+                </div>
+                <div className="py-1">
+                  <label htmlFor="agreeTerms">
+                    <input className='p-3 m-1 w-60 bg-neutral-100 border-b-indigo-500 ' type="checkbox" id="agreeTerms" name="agreeTerms" />
+                    Send notification to my Email
+                  </label>
+                </div>
+
               </div>
-            </div>
-            <div className="form-group">
-              <label htmlFor="password"></label>
-              <input className='p-3 m-1 w-60 bg-neutral-100 border-b-indigo-500 ' type="password" id="password" name="password" placeholder='Password' ref={password} />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="agreeTerms">
-                <input className='p-3 m-1 w-60 bg-neutral-100 border-b-indigo-500 ' type="checkbox" id="agreeTerms" name="agreeTerms" />
-                Send notification to my Email
-              </label>
-            </div>
-
-          </form>
+            </form>
+          </div>
         </div>
-        <div className='w-full md:w-1/2 md:m-5 min-h-screen bg-no-repeat bg-cover flex flex-col justify-start' style={{ backgroundImage: "url('/public/image/imagen-registro.svg')" }}>
-        </div>
-
-      </div >
-
-
+      </div>
     </>
   );
 }
+
 export default Register;

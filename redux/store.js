@@ -6,6 +6,9 @@ import { configureStore } from '@reduxjs/toolkit';
 import mangasReducer from './reducers/mangasReducer';
 import  myMangasReducer  from './reducers/mangas';
 import mangaReduce from './reducers/mangaReduce'
+import myMangasReducer from './reducers/mangas';
+import reducerAlert from './reducers/DocuApiRedicers';
+
 
 
 
@@ -18,9 +21,9 @@ export const store = configureStore({
         mangas : mangasReducer,
         myMangas: myMangasReducer,
         mangas : mangasReducer,
-        mangasNew : mangaReduce
+        mangasNew : mangaReduce,
+        alert: reducerAlert,
+        }
     }
-
-   
-});
+);
 
