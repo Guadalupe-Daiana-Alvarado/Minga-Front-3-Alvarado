@@ -12,44 +12,49 @@ import { useDispatch, useSelector } from 'react-redux';
 
 
 function MyMangasAuthor() {
-  let {myMangas,mangaDelete} = actions
+  let { myMangas, mangaDelete } = actions
 
-  const dispatch= useDispatch()
-  let mangas = useSelector(store=>store?.myMangas?.mangas)
+  const dispatch = useDispatch()
+  let mangas = useSelector(store => store?.myMangas?.mangas)
   useEffect(() => {
     if (mangas.length === 0) {
 
-        dispatch(myMangas())
+      dispatch(myMangas())
     }
-}, [])
+  }, [])
 
 
-  
+
   const userToken = localStorage.getItem("token")
-  console.log(mangas)
-  const headers = { headers: { "authorization": `Bearer ${userToken}` } }
-  
-  const handleDelete = (mangaId) => {
-    console.log("Manga ID", mangaId)
 
+  const headers = { headers: { "authorization": `Bearer ${userToken}` } }
+
+  const handleDelete = (mangaId) => {
+    
     if (window.confirm('¿Estás seguro de que quieres eliminar este manga?')) {
-      dispatch(mangaDelete({id:mangaId}))
+      dispatch(mangaDelete({ id: mangaId }))
     }
   };
 
   return (
-    <div className='flex flex-wrap'>
-      <Link to="/manga-form">
-        <button>+</button>
-      </Link>
-      {Array.isArray(mangas) && mangas.map((manga) => (
-        <MangaCard
-          key={manga._id}
-          manga={manga}
+    <div className=''>
+      
+      <div className='manga-cards-container flex flex-col items-center lg:flex-row flex-wrap"'>
+      <div className='w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 p-2'>
+        <Link to="/manga-form">+</Link>
+        <img src="../../public/image/luffy.jpg" alt="" />
+      </div>
+      
+        {Array.isArray(mangas) && mangas.map((manga) => (
+          <MangaCard
+            key={manga._id}
+            manga={manga}
 
-          onDelete={() => handleDelete(manga._id)}
-        />
-      ))}
+            onDelete={() => handleDelete(manga._id)}
+          />
+        ))}
+      </div>
+
     </div>
   );
 }
