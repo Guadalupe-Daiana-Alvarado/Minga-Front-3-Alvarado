@@ -4,11 +4,32 @@ import axios from 'axios';
 // Acción para obtener datos de autores
 const authorData = createAction("getAuthordata", ({ info }) => {
   return {
-    payload: 
+    payload: {
       info
-    }
+    
   }
-)
+}});
+
+// Acción para obtener la lista de autores con autenticación
+const fetchAuthors = createAsyncThunk('authors', async (token) => {
+  try {
+    //aca obtengo el token desde donde lo tengo almacenado
+    const token = localStorage.getItem("token")
+    console.log(token)
+    // Configurar los headers con el token
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+
+    // Realizar la solicitud con los headers configurados
+    const response = await axios.get('http://localhost:8000/authors/admin', { headers });
+    console.log(response.data)
+    return response.data
+  }
+  catch (error) {
+    console.log(error)
+  }
+})
 
 
 // Acción para cambiar el estado de un autor (activar/desactivar)
