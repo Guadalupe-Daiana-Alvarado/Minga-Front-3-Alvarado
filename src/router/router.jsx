@@ -18,6 +18,7 @@ import ChapterForm from "../Pages/ChapterForm"
 import AdminPanel from '../components/AdminPanel'
 import MyMangas from '../Pages/MyMangas'
 import EditMangas from '../Pages/EditMangas'
+import Donation from '../components/Donation'
 import DocumentacionApi from '../Pages/DocumentacionApi'
 
 
@@ -31,6 +32,10 @@ const Router = createBrowserRouter([
             {
                 path: '/',
                 element: <Index />
+            },
+            {
+                path:'NotAllow',
+                element: <NotAllow/>
             },
             {
                 path: '/Register',
@@ -121,10 +126,18 @@ const Router = createBrowserRouter([
                 element: <Login />
             },
             {
-                path: "/admin",
-                element: <AdminPanel />
+                path: '/payments/create-order',
+                element: <Donation />
+                
+                
 
             },
+            {
+                path: "/admin",
+                element: <AdminPanel />
+            },
+
+           
             {
                 path: "/documentacionApi",
                 element: <DocumentacionApi />

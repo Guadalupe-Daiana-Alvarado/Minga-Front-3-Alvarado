@@ -4,12 +4,13 @@ import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { authorData } from '../../redux/actions/me_authors.js';
 import mangasData from '../../redux/actions/manga_news.js';
+import actions from '../../redux/actions/mangas.js';
 
 const Author = () => {
   const [showNewMangas, setShowNewMangas] = useState(true);
   const profile = useSelector((store) => store.author_reduce.profile);
-  console.log(profile)
-  const mangasNews = useSelector((store) => store.mangasNews_reduce.mangas_news);
+  console.log("desde el reducer",profile)
+  const mangasNews = useSelector((store) => store.myMangas.mangas);
   const dispatch = useDispatch();
   const store = useSelector((store) => store)
   console.log(store)
@@ -19,16 +20,18 @@ const Author = () => {
     axios("http://localhost:8000/authors/me")
       .then((res) => {
         dispatch(authorData({ info: res.data.author }));
-        console.log(res.data.author);
+        console.log("Respuesta del autor",res.data.author);
       })
       .catch((error) => console.log(error));
   }
 
   function getDataMangas() {
-    axios("http://localhost:8000/mangas?news")
+let {myMangas,mangaDelete} = actions
+
+    axios("http://localhost:8000/mangas/me")
       .then((res) => {
         console.log(res);
-        dispatch(mangasData({ info_mangas: res.data.mangas }));
+        dispatch(myMangas({ info_mangas: res.data.mangas }));
       })
       .catch((error) => console.log(error));
   }
