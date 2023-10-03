@@ -30,7 +30,7 @@ function ChapterForm() {
           headers: {
             Authorization:
               "Bearer " +
-              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NGYzYTg0YWMwMGU4OWQ0MTI3NWM5M2QiLCJlbWFpbCI6ImlnbmFAbWguY29tLmFyIiwiaWF0IjoxNjk1MDA1MDkzLCJleHAiOjE2OTUwOTE0OTN9.bv44W7CHxI_dno4hYK_QiDaRyHc9HCoNbIp8c4QyTYY",
+              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NGYzYTg0YWMwMGU4OWQ0MTI3NWM5M2QiLCJlbWFpbCI6ImlnbmFAbWguY29tLmFyIiwiaWF0IjoxNjk1MzU3MjU1LCJleHAiOjE2OTU0NDM2NTV9.dWsBd1JDPYQQoLQG9-wuUT7OMILyp_42qjs8q045HS4",
           },
         }
       );
@@ -87,8 +87,6 @@ function ChapterForm() {
     </div>
   );
 }
-
-export default ChapterForm;
 
 // import React, { useState, useEffect, useRef } from 'react';
 // import Alert from '../components/Alert';
@@ -155,6 +153,6 @@ export default ChapterForm;
 //   );
 // }
 
-// export default ChapterForm;
+export default ChapterForm;
 
 

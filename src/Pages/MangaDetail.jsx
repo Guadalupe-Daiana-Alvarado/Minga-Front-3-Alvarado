@@ -5,6 +5,7 @@ import MangaCover from '../components/MangaCover.jsx';
 import EmojisDataManga from '../components/EmojisDataManga.jsx';
 import ButtonManga from '../components/ButtonManga.jsx';
 import Content from '../components/Content.jsx';
+import ListComment from "../components/ListComment.jsx"
 
 const MangaDetail = () => {
   const { id } = useParams();
@@ -56,6 +57,7 @@ const MangaDetail = () => {
           onPageChange: setCurrentPage, // Pasa setCurrentPage como onPageChange
         }}
       />
+        
     </div>
   );
 };

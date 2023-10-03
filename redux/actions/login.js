@@ -23,4 +23,3 @@ export const login = createAsyncThunk('login', async (data) => {
     console.log("error",error)
   }
 })
-

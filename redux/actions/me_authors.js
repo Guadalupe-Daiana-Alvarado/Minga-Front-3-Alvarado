@@ -6,9 +6,9 @@ const authorData = createAction("getAuthordata", ({ info }) => {
   return {
     payload: {
       info
-    }
+    
   }
-});
+}});
 
 // Acción para obtener la lista de autores con autenticación
 const fetchAuthors = createAsyncThunk('authors', async (token) => {
