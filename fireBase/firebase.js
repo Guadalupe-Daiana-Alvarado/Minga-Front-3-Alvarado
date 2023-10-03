@@ -1,37 +1,26 @@
-import { initializeApp } from 'firebase/app';
-import { getStorage, ref, uploadBytes } from 'firebase/storage';
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import {v4} from "uuid"
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBhCUlTiV-vs869Y3xdP917l3mVal69TBw",
-  authDomain: "minga-e2fb3.firebaseapp.com",
-  projectId: "minga-e2fb3",
-  storageBucket: "minga-e2fb3.appspot.com",
-  messagingSenderId: "794188098025",
-  appId: "1:794188098025:web:a3f8721731015e604c4378",
-  measurementId: "G-DNP2G6P54J"
+  apiKey: "AIzaSyANu7Jy2YL_QuMdKKPOvwUX5P17X8yM8Eg",
+  authDomain: "fir-multer-822ac.firebaseapp.com",
+  projectId: "fir-multer-822ac",
+  storageBucket: "fir-multer-822ac.appspot.com",
+  messagingSenderId: "243354845873",
+  appId: "1:243354845873:web:3338c6340bb61b57e3d890"
 };
 
-const firebaseApp = initializeApp(firebaseConfig);
-const storage = getStorage(firebaseApp);
+// Initialize Firebase
+export const firebaseApp = initializeApp(firebaseConfig);
 
-// Función para cargar un archivo a Firebase Storage
+export const storage = getStorage(firebaseApp)
 
-async function upLoadFile(file) {
-  if (!file) {
-    console.error('El archivo es nulo o indefinido.');
-    return;
-  }
 
-  const storeRef = ref(storage, '/image');
-
-  try {
-    const snapshot = await uploadBytes(storeRef, file);
-    console.log('Archivo cargado correctamente:', snapshot);
-    return snapshot;
-  } catch (error) {
-    console.error('Error al cargar el archivo en Firebase Storage:', error);
-    throw error;
-  }
+export async function uploadFile(file){
+    const storageRef = ref(storage, v4())
+    await uploadBytes(storageRef, file)
+    const url = await getDownloadURL(storageRef)
+    return url
 }
-
-export { firebaseApp };
