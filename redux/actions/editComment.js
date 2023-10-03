@@ -12,8 +12,9 @@ const editComment = createAsyncThunk('editComment', async (info, { rejectWithVal
                 Authorization: "Bearer " + info.token
             },
         });
-
-        return { comments: res.data.response };
+        console.log(info)
+        return { comments: res.data.response};
+    
     } catch (error) {
         console.log(error)
         return rejectWithValue({ error: error.message });
