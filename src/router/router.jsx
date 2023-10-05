@@ -12,12 +12,16 @@ import NotAllow from '../Pages/NotAllow'
 import Page from '../Pages/Page'
 import Register from '../Pages/Register'
 import NewRole from '../Pages/NewRole'
-import Login from '../components/login'
+import Login from '../components/Login'
 import MangaForm from '../Pages/MangaForm'
 import ChapterForm from "../Pages/ChapterForm"
+import AdminPanel from '../components/AdminPanel'
 import MyMangas from '../Pages/MyMangas'
 import EditMangas from '../Pages/EditMangas'
 import EditChapter from '../Pages/EditChapter'
+import Donation from '../components/Donation'
+import DocumentacionApi from '../Pages/DocumentacionApi'
+
 
 const Router = createBrowserRouter([
 
@@ -80,7 +84,7 @@ const Router = createBrowserRouter([
             },
             {
                 path: "/edit/manga",
-                element: <EditMangas/>
+                element: <EditMangas />
             },
             {
                 path: '/manga/:id',
@@ -121,7 +125,32 @@ const Router = createBrowserRouter([
             {
                 path: '/login',
                 element: <Login />
+            },
+            
+            {
+                path: '/comment ',
+                element: <Comment/>
+            } ,        
+            {
+                path: '/payments/create-order',
+                element: <Donation />
+                
+                
+
+            },
+            {
+                path: "/admin",
+                element: <AdminPanel />
+            },
+
+           
+            {
+                path: "/documentacionApi",
+                element: <DocumentacionApi />
+
             }
+
+
         ]
     }
 

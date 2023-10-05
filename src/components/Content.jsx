@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import ListComment from "./ListComment"
 
 const Content = (props) => {
   const { manga, chapters, hasPrevPage, hasNextPage, showChapters, onPageChange } = props;
   const [currentPage, setCurrentPage] = useState(1);
+  const [open, setOpen] = useState(false);
+  const [chapterTitle, setChapterTitle] = useState('')
+  const [chapterId, setChapterId] = useState('')
 
   // Función para manejar el botón "Página Anterior" de los capítulos
   const handlePrevPage = () => {
@@ -37,7 +41,12 @@ const Content = (props) => {
                   <div className='flex flex-col ml-2 gap-2'>
                     <Link to={`/chapter/${chapter?._id}/1`}>{chapter?.title}</Link>
                     <div className='flex'>
-                      <img src='../public/image/icon_comment.png' alt='icon_comment' />
+                      {/* <Link to={`/comment/${chapter?._id}`}> */}
+                        <button onClick={()=>{
+                        setOpen(true); setChapterId(chapter._id); setChapterTitle(chapter.title)
+                      }}><img src='../public/image/icon_comment.png' alt='icon_comment' /></button>
+                      {open && <ListComment open={open} setOpen={setOpen} chapter_id={chapterId} chapterName={chapterTitle} />}
+                      {/* </Link> */}
                       <p>N° XX</p>
                     </div>
                   </div>

@@ -12,44 +12,51 @@ import { useDispatch, useSelector } from 'react-redux';
 
 
 function MyMangasAuthor() {
-  let {myMangas,mangaDelete} = actions
+  let { myMangas, mangaDelete } = actions
 
-  const dispatch= useDispatch()
-  let mangas = useSelector(store=>store?.myMangas?.mangas)
+  const dispatch = useDispatch()
+  let mangas = useSelector(store => store?.myMangas?.mangas)
   useEffect(() => {
     if (mangas.length === 0) {
 
-        dispatch(myMangas())
+      dispatch(myMangas())
     }
-}, [])
+  }, [])
 
 
-  
+
   const userToken = localStorage.getItem("token")
-  console.log(mangas)
-  const headers = { headers: { "authorization": `Bearer ${userToken}` } }
-  
-  const handleDelete = (mangaId) => {
-    console.log("Manga ID", mangaId)
 
+  const headers = { headers: { "authorization": `Bearer ${userToken}` } }
+
+  const handleDelete = (mangaId) => {
+    
     if (window.confirm('¿Estás seguro de que quieres eliminar este manga?')) {
-      dispatch(mangaDelete({id:mangaId}))
+      dispatch(mangaDelete({ id: mangaId }))
     }
   };
 
   return (
-    <div className='flex flex-wrap'>
-      <Link to="/manga-form">
-        <button>+</button>
-      </Link>
-      {Array.isArray(mangas) && mangas.map((manga) => (
-        <MangaCard
-          key={manga._id}
-          manga={manga}
+    <div className='flex flex-col items-center justify-center lg:flex-row flex-wrap '>
+      
+      <div className='manga-cards-container flex flex-wrap items-center justify-center lg:flex-row "'>
+      <div className='w-full p-2 flex flex-col items-center justify-center '>
+        <Link to="/manga-form">
+          <button className='p-1 m-3 text-white font-bold ml-5  w-28 bg-pink-400 rounded-full'>New Manga</button>
+        </Link>
+        <img className='md:w-1/2' src="../../public/image/luffy.jpg" alt="" />
+      </div>
+      
+        {Array.isArray(mangas) && mangas.map((manga) => (
+          <MangaCard
+            key={manga._id}
+            manga={manga}
 
-          onDelete={() => handleDelete(manga._id)}
-        />
-      ))}
+            onDelete={() => handleDelete(manga._id)}
+          />
+        ))}
+      </div>
+
     </div>
   );
 }

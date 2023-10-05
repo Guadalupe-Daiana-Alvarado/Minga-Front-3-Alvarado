@@ -6,8 +6,11 @@ import deleteChapterAccion from '../../redux/actions/deleteChapterAccion.js';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { uploadFile } from '../../fireBase/firebase.js';
+import { useParams } from 'react-router-dom';
+
 
 const EditChapter = () => {
+  const {manga_id} = useParams()
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user, token } = useSelector((state) => state.user_reduce);
@@ -25,13 +28,14 @@ const EditChapter = () => {
 
   const getManga = async () => {
     try {
-      const mangaById = await axios.get('http://localhost:8000/chapters/me?manga_id=650d77d9ac832ff3f05d52b2', {
+      const mangaById = await axios.get(`http://localhost:8000/mangas/${manga_id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
       const mangaChaptersArray = mangaById.data;
-      setArray(mangaChaptersArray);
+      console.log(mangaById.data) 
+      //setArray(mangaChaptersArray);
     } catch (error) {
       console.log(error);
     }
@@ -167,7 +171,7 @@ const EditChapter = () => {
               className="border-b-2 border-neutral-400 bg-slate-100 text-xs pt-5 w-full md:w-1/2"
             >
               {array ? (
-                array.map((chapter) => (
+                array?.map((chapter) => (
                   <option key={chapter._id} value={chapter.title}>
                     {chapter.title}
                   </option>

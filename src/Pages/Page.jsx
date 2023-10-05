@@ -14,7 +14,7 @@ const Page = () => {
   const [counter, setCounter] = useState(Number(page));
   const [chapter, setChapter] = useState({});
   
-  const { number, title } = useSelector((store) => store.chapters)
+  const { number, title } = useSelector((store) => store.chapter)
   const navigate = useNavigate()
   const location = useLocation()
   const dispatch = useDispatch() 
