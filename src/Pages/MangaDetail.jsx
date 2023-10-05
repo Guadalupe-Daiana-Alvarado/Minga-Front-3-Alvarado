@@ -8,6 +8,7 @@ import Content from '../components/Content.jsx';
 import { useDispatch, useSelector } from 'react-redux';
 import actions from '../../redux/actions/mangaDetail.js';
 
+import ListComment from "../components/ListComment.jsx"
 
   const MangaDetail = () => {
     const {mangaData, chaptersData} = actions
@@ -53,6 +54,7 @@ console.log(chaptersDataSelector)
           onPageChange: setCurrentPage, // Pasa setCurrentPage como onPageChange
         }}
       />
+        
     </div>
   );
 };

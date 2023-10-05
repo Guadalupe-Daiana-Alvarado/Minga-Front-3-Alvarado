@@ -3,9 +3,9 @@ import editComment from '../../redux/actions/editComment';
 import { useDispatch } from 'react-redux';
 
 const EditComment = ({ edit, setEdit, user, token }) => {
-
     const comment = useRef();
     const dispatch = useDispatch();
+
 
     const sendEditComment = async () => {
         const commentText = comment.current.value;
@@ -43,7 +43,9 @@ const EditComment = ({ edit, setEdit, user, token }) => {
                             <div className="sm:flex sm:items-start">
                                 <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
                                     <h3 className="text-base font-semibold leading-6 text-gray-900" id="modal-title">{edit.comment.user_id.email}</h3>
-                                    <div className="mt-2">
+                                    {console.log("Edit comment prop:", edit.comment)
+}
+                                    <div className="mt-2"> 
                                         <label htmlFor="large-input" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Large input</label>
                                         <input ref={comment} type="text" id="large-input" className="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder={edit.comment.text} />
                                     </div>

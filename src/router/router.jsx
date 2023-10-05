@@ -12,10 +12,11 @@ import NotAllow from '../Pages/NotAllow'
 import Page from '../Pages/Page'
 import Register from '../Pages/Register'
 import NewRole from '../Pages/NewRole'
-import Login from '../components/login'
+import Login from '../components/Login'
 import MangaForm from '../Pages/MangaForm'
 import ChapterForm from "../Pages/ChapterForm"
-import Comments from '../Pages/Comments'
+import MyMangas from '../Pages/MyMangas'
+import EditMangas from '../Pages/EditMangas'
 
 const Router = createBrowserRouter([
 
@@ -30,7 +31,7 @@ const Router = createBrowserRouter([
             },
             {
                 path: '/Register',
-                element: <Register/>
+                element: <Register />
             },
             {
                 path: '/author-form',
@@ -60,8 +61,16 @@ const Router = createBrowserRouter([
 
             {
                 path: '/manga-form',
-                element: <MangaForm/>
+                element: <MangaForm />
 
+            },
+            {
+                path: "/mymangas",
+                element: <MyMangas />
+            },
+            {
+                path: "/edit/manga",
+                element: <EditMangas/>
             },
 
             {
@@ -75,7 +84,7 @@ const Router = createBrowserRouter([
 
             {
                 path: '/manga-form',
-                element: <MangaForm/>
+                element: <MangaForm />
 
             },
 
@@ -88,21 +97,21 @@ const Router = createBrowserRouter([
                 path: '/manga/:id/',
                 element: <MangaDetail/>
             },
-            
+
             {
                 path: '/manga/:id/chapter-form',
-                element: <ChapterForm/>
+                element: <ChapterForm />
             },
 
             {
                 path: '/chapter',
-                element: <ChapterListTab/>
+                element: <ChapterListTab />
             },
 
 
             {
                 path: '/chapter/:id/:page',
-                element: <Page/>
+                element: <Page />
             },
             {
                 path: '/login',
