@@ -9,6 +9,9 @@ import mangaReduce from './reducers/mangaReduce'
 import commentsReducer from './reducers/commentsReducer';
 import { loginReducer } from './reducers/login';
 import reducerAlert from './reducers/DocuApiRedicers';
+import mangaDetailReducer from '../redux/reducers/mangaDetail.js';
+import chaptersMangaDetailReducer from './reducers/chaptersMangaDetail';
+import { botReducer } from './reducers/botReducer';
 
 
 
@@ -23,6 +26,14 @@ export const store = configureStore({
         myMangas: myMangasReducer,
         mangasNew : mangaReduce,
         alert: reducerAlert,
+        mangas : mangasReducer,
+        botReducer,
+        commentsReducer, 
+        user_reduce:loginReducer,
+        manga: mangaDetailReducer,
+        chaptersMangaDetail: chaptersMangaDetailReducer,
+
+
         commentsReducer
        
     }

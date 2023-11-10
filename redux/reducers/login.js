@@ -2,8 +2,8 @@ import { createReducer } from "@reduxjs/toolkit";
 import { login } from "../actions/login";
 
 const initialState = {
-  user: null,
-  token: null
+  user: {role: -1},
+  token: ''
 };
 
 export const loginReducer = createReducer(initialState, (builder) => {

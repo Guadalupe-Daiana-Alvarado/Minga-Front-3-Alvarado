@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import ListComment from "./ListComment"
+
 
 const Content = (props) => {
   const { manga, chapters, hasPrevPage, hasNextPage, showChapters, onPageChange } = props;
@@ -8,29 +9,30 @@ const Content = (props) => {
   const [open, setOpen] = useState(false);
   const [chapterTitle, setChapterTitle] = useState('')
   const [chapterId, setChapterId] = useState('')
-
+  
   // Función para manejar el botón "Página Anterior" de los capítulos
   const handlePrevPage = () => {
     if (hasPrevPage) {
       setCurrentPage((prev) => prev - 1); // Decrementa la página actual
       onPageChange(currentPage - 1); // Llama a la función onPageChange con la nueva página
-    }
+     setReload(!reload)}
   };
 
   // Función para manejar el botón "Página Siguiente" de los capítulos
   const handleNextPage = () => {
     if (hasNextPage) {
-      setCurrentPage((prev) => prev + 1); // Incrementa la página actual
+      setCurrentPage((next) => next + 1); // Incrementa la página actual
       onPageChange(currentPage + 1); // Llama a la función onPageChange con la nueva página
     }
   };
-
+  
+console.log(hasPrevPage, hasNextPage, currentPage)
   return (
     <div className='mt-10'>
       {showChapters ? (
         <div>
           <ul>
-            {chapters.map((chapter, Index) => (
+            {chapters?.map((chapter, Index) => (
               <li key={Index}>
                 <div className='flex items-center justify-evenly'>
                   <img
@@ -58,6 +60,7 @@ const Content = (props) => {
             ))}
           </ul>
           <div className='flex justify-center'>
+      
             {hasPrevPage && (
               <button className='text-white bg-gradient-to-b from-pink-300 to-pink-500 rounded-md w-32 h-10 text-sm my-4 ml-2' onClick={handlePrevPage}>Página anterior</button>
             )}

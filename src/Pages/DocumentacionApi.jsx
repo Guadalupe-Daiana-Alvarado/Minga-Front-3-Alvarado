@@ -29,12 +29,12 @@ function DocumentacionApi() {
 
 
     return (
-        <div className="flex flex-col items-center justify-center h-screen bg-pink-500 text-white">
+        <div className="flex flex-col items-center justify-center h-full bg-pink-500 text-white">
             <h1 className="text-4xl font-bold mb-4">Documentación de la API</h1>
             <p>
                 Bienvenido a la documentación de nuestra API. Aquí encontrarás información sobre cómo utilizar nuestros servicios.
             </p>
-            <p className=" my-8">¿Qué es una API?
+            <p className=" my-10 p-3 mt-28 bg-pink-400">¿Qué es una API?
                 Una API (Interfaz de programación de aplicaciones) es un contrato que permite a los desarrolladores interactuar con una aplicación a través de un conjunto de interfaces.
                 En este caso, la aplicación es una base de datos de miles de objetos relacionados con Pokémon y las interfaces son enlaces URL.
 
@@ -55,9 +55,9 @@ function DocumentacionApi() {
 
             <h2 className="text-2xl mt-6"> Ejemplo de documentacion Swagger: 👇</h2>
 
-            <div className="flex justify-center mt-4">
-                <img src="../../public/image/captura1.png" alt="Imagen 1" className="h-auto w-auto max-h-64 max-w-64 mr-4" />
-                <img src="../../public/image/captura2.png" alt="Imagen 2" className="h-auto w-auto max-h-64 max-w-64 ml-4" />
+            <div className="flex flex-col m-4 ">
+                <img src="../../public/image/captura1.png" alt="Imagen 1" className="h-auto w-auto max-h-64 max-w-64 m-4" />
+                <img src="../../public/image/captura2.png" alt="Imagen 2" className="h-auto w-auto max-h-64 max-w-64 m-4" />
             </div>
 
 

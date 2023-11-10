@@ -47,12 +47,12 @@ const CreateReply = ({ parentCommentId, user }) => {
 
     return (
         <div>
-            <textarea
+            {/* <textarea
                 value={replyText}
                 onChange={(e) => setReplyText(e.target.value)}
                 placeholder="Escribe tu respuesta aquí"
-            />
-            <button onClick={handleCreateReply}>Enviar respuesta</button>
+            /> */}
+            <button onClick={handleCreateReply}>Send</button>
         </div>
     );
 };

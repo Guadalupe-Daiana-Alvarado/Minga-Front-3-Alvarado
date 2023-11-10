@@ -14,6 +14,7 @@ const Display = () => {
   console.log(role);
   const userToken = localStorage.getItem("token");
   const headers = { headers: { "authorization": `Bearer ${userToken}` } };
+  
   const logout = async () => {
     axios.post("http://localhost:8000/auth/signout", null, headers)
       .then(res => {

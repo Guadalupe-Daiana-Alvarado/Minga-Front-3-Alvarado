@@ -103,7 +103,7 @@ const Router = createBrowserRouter([
                 element: <ChapterListTab />
             },
             {
-                path: '/manga/:id',
+                path: '/manga/:id/',
                 element: <MangaDetail/>
             },
             {

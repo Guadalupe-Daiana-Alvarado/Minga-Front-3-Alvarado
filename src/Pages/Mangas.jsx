@@ -152,4 +152,3 @@ function Mangas() {
 }
 
 export default Mangas;
-
